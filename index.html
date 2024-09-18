@@ -39,6 +39,18 @@
         section {
             margin-bottom: 40px;
         }
+        .content {
+            display: none;
+        }
+        .visible {
+            display: block;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+        }
         footer {
             background-color: #333;
             color: white;
@@ -57,59 +69,81 @@
     </header>
 
     <nav>
-        <a href="#introduction">Introduction</a>
-        <a href="#vulnerabilities">Common Vulnerabilities</a>
-        <a href="#defenses">Security Defenses</a>
-        <a href="#tools">Tools & Techniques</a>
-        <a href="#conclusion">Conclusion</a>
+        <a href="#introduction" onclick="showContent('introduction')">Introduction</a>
+        <a href="#vulnerabilities" onclick="showContent('vulnerabilities')">Common Vulnerabilities</a>
+        <a href="#defenses" onclick="showContent('defenses')">Security Defenses</a>
+        <a href="#tools" onclick="showContent('tools')">Tools & Techniques</a>
+        <a href="#conclusion" onclick="showContent('conclusion')">Conclusion</a>
     </nav>
 
     <div class="container">
-        <section id="introduction">
+        <section id="introduction" class="content">
             <h2>Introduction</h2>
             <p>In the age of AI, chatbots have become essential tools for businesses. However, with this rise, security concerns have increased as well. This handbook is designed to help developers secure their AI chatbots and protect against common vulnerabilities.</p>
+            <img src="images/chatbot_intro.png" alt="Chatbot Security Introduction">
         </section>
 
-        <section id="vulnerabilities">
+        <section id="vulnerabilities" class="content">
             <h2>Common Vulnerabilities</h2>
+            <p>Chatbots are vulnerable to a variety of attacks, such as:</p>
             <ul>
                 <li>Data Leakage through Prompt Injection</li>
                 <li>Denial of Service (DoS) Attacks</li>
                 <li>SQL Injection Attacks</li>
                 <li>Cross-Site Scripting (XSS)</li>
             </ul>
+            <img src="images/vulnerabilities_chart.png" alt="Vulnerabilities Chart">
         </section>
 
-        <section id="defenses">
+        <section id="defenses" class="content">
             <h2>Security Defenses</h2>
-            <p>There are several defenses that can help mitigate these vulnerabilities, including:</p>
+            <p>To mitigate vulnerabilities, developers can implement:</p>
             <ul>
                 <li>Input Sanitization</li>
                 <li>Context Management</li>
                 <li>Rate Limiting</li>
                 <li>Homomorphic Encryption</li>
             </ul>
+            <img src="images/defenses.png" alt="Security Defenses">
         </section>
 
-        <section id="tools">
+        <section id="tools" class="content">
             <h2>Tools & Techniques</h2>
-            <p>Here are some tools and techniques you can use to secure your chatbot:</p>
+            <p>Here are some tools and techniques to secure your chatbot:</p>
             <ul>
                 <li>OWASP Security Framework</li>
-                <li>Homomorphic Encryption Libraries</li>
-                <li>OpenAI GPT-3 Sandbox Testing</li>
-                <li>Monitoring and Logging with RASP</li>
+                <li>Encryption Libraries</li>
+                <li>GPT-3 Sandbox Testing</li>
+                <li>Monitoring & Logging Tools</li>
             </ul>
+            <img src="images/tools_techniques.png" alt="Tools and Techniques">
         </section>
 
-        <section id="conclusion">
+        <section id="conclusion" class="content">
             <h2>Conclusion</h2>
-            <p>By understanding the common vulnerabilities and employing the right defenses, developers can ensure the security of their AI chatbots. This handbook serves as a guide to implementing best practices in chatbot development.</p>
+            <p>By understanding common vulnerabilities and employing robust defenses, developers can secure their AI chatbots effectively. This handbook provides guidance on best practices.</p>
         </section>
     </div>
 
     <footer>
         <p>&copy; 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        function showContent(sectionId) {
+            // Hide all content
+            var sections = document.querySelectorAll('.content');
+            sections.forEach(function(section) {
+                section.classList.remove('visible');
+            });
+
+            // Show the selected section
+            var selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('visible');
+        }
+
+        // Show the introduction section by default
+        document.getElementById('introduction').classList.add('visible');
+    </script>
 </body>
 </html>
