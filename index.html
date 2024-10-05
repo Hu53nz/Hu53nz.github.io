@@ -1,150 +1,405 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cybersecurity Handbook for AI Chatbots</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-        }
-        nav {
-            background-color: #444;
-            overflow: hidden;
-        }
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            float: left;
-        }
-        nav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
-        .container {
-            padding: 20px;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        .content {
-            display: none;
-        }
-        .visible {
-            display: block;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-            border: 1px solid #ddd;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Cybersecurity Handbook for AI Chatbots</h1>
-        <p>Your Guide to Securing AI-Powered Chatbots</p>
-    </header>
-
-    <nav>
-        <a href="#introduction" onclick="showContent('introduction')">Introduction</a>
-        <a href="#Peompt injection attack" onclick="showContent('Prompt injection attack')">Prompt Injection Attack & Solution</a>
-        <a href="#CSS Attack" onclick="showContent('CSS Attack')">Cross Site Scripting Attack & Solution</a>
-        <a href="#DoS Attack" onclick="showContent('DoS Attack')">Denial of Service Attack & Solution</a>
-        <a href="#conclusion" onclick="showContent('conclusion')">Other significant attacks</a>
-        
-    </nav>
-
-    <div class="container">
-        <section id="introduction" class="content">
-            <h2>Introduction</h2>
-            <p>In the age of AI, chatbots have become essential tools for businesses. However, with this rise, security concerns have increased as well. This handbook is designed to help developers secure their AI chatbots and protect against common vulnerabilities.</p>
-            <img src="images/chatbot_intro.png" alt="Chatbot Security Introduction">
-        </section>
-
-        <section id="vulnerabilities" class="content">
-            <h2>Common Vulnerabilities</h2>
-            <p>Chatbots are vulnerable to a variety of attacks, such as:</p>
-            <ul>
-                <li>Data Leakage through Prompt Injection</li>
-                <li>Denial of Service (DoS) Attacks</li>
-                <li>SQL Injection Attacks</li>
-                <li>Cross-Site Scripting (XSS)</li>
-            </ul>
-            <img src="images/vulnerabilities_chart.png" alt="Vulnerabilities Chart">
-        </section>
-
-        <section id="defenses" class="content">
-            <h2>Security Defenses</h2>
-            <p>To mitigate vulnerabilities, developers can implement:</p>
-            <ul>
-                <li>Input Sanitization</li>
-                <li>Context Management</li>
-                <li>Rate Limiting</li>
-                <li>Homomorphic Encryption</li>
-            </ul>
-            <img src="images/defenses.png" alt="Security Defenses">
-        </section>
-
-        <section id="tools" class="content">
-            <h2>Tools & Techniques</h2>
-            <p>Here are some tools and techniques to secure your chatbot:</p>
-            <ul>
-                <li>OWASP Security Framework</li>
-                <li>Encryption Libraries</li>
-                <li>GPT-3 Sandbox Testing</li>
-                <li>Monitoring & Logging Tools</li>
-            </ul>
-            <img src="images/tools_techniques.png" alt="Tools and Techniques">
-        </section>
-
-        <section id="conclusion" class="content">
-            <h2>Conclusion</h2>
-            <p>By understanding common vulnerabilities and employing robust defenses, developers can secure their AI chatbots effectively. This handbook provides guidance on best practices.</p>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-        function showContent(sectionId) {
-            // Hide all content
-            var sections = document.querySelectorAll('.content');
-            sections.forEach(function(section) {
-                section.classList.remove('visible');
-            });
-
-            // Show the selected section
-            var selectedSection = document.getElementById(sectionId);
-            selectedSection.classList.add('visible');
-        }
-
-        // Show the introduction section by default
-        document.getElementById('introduction').classList.add('visible');
-    </script>
-</body>
-</html>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+    <title>Cybersecurity Handbook for AI Chatbots</title>  
+    <link rel="stylesheet" href="styles.css">  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 0;  
+            background-color: #f4f4f4;  
+        }  
+        header {  
+            background-color: #333;  
+            color: white;  
+            text-align: center;  
+            padding: 1rem 0;  
+        }  
+        nav {  
+            background-color: #444;  
+            overflow: hidden;  
+        }  
+        nav a {  
+            color: white;  
+            padding: 14px 20px;  
+            text-decoration: none;  
+            float: left;  
+        }  
+        nav a:hover {  
+            background-color: #ddd;  
+            color: black;  
+        }  
+        .container {  
+            padding: 20px;  
+        }  
+        section {  
+            margin-bottom: 40px;  
+        }  
+        .content {  
+            display: none;  
+        }  
+        .visible {  
+            display: block;  
+        }  
+        img {  
+            max-width: 100%;  
+            height: auto;  
+            margin-top: 10px;  
+            border: 1px solid #ddd;  
+        }  
+        footer {  
+            background-color: #333;  
+            color: white;  
+            text-align: center;  
+            padding: 10px;  
+            position: fixed;  
+            width: 100%;  
+            bottom: 0;  
+        }  
+        .code-block {  
+            background-color: #2d2d2d;  
+            color: #f8f8f2;  
+            padding: 10px;  
+            border-radius: 5px;  
+            overflow-x: auto;  
+            white-space: pre;  
+        }  
+        .collapsible {  
+            background-color: #777;  
+            color: white;  
+            cursor: pointer;  
+            padding: 10px;  
+            width: 100%;  
+            border: none;  
+            text-align: left;  
+            outline: none;  
+            font-size: 15px;  
+        }  
+        .collapsible:after {  
+            content: '\002B';  
+            font-size: 13px;  
+            color: white;  
+            float: right;  
+            margin-left: 5px;  
+        }  
+        .active:after {  
+            content: "\2212";  
+        }  
+        .collapsible-content {  
+            padding: 0 18px;  
+            display: none;  
+            overflow: hidden;  
+            background-color: #f1f1f1;  
+        }  
+    </style>  
+</head>  
+<body>  
+    <header>  
+        <h1>Cybersecurity Handbook for AI Chatbots</h1>  
+        <p>Your Guide to Securing AI-Powered Chatbots</p>  
+    </header>  
+    <nav>  
+        <a href="#introduction" onclick="showContent('introduction')">Introduction</a>  
+        <a href="#prompt-injection-attack" onclick="showContent('prompt-injection-attack')">Prompt Injection Attack & Solution</a>  
+        <a href="#css-attack" onclick="showContent('css-attack')">Cross Site Scripting Attack & Solution</a>  
+        <a href="#dos-attack" onclick="showContent('dos-attack')">Denial of Service Attack & Solution</a>  
+        <a href="#conclusion" onclick="showContent('conclusion')">Other significant attacks</a>  
+    </nav>  
+    <div class="container">  
+        <section id="introduction" class="content">  
+            <h2>Introduction</h2>  
+            <p>In the age of AI, chatbots have become essential tools for businesses. However, with this rise, security concerns have increased as well. This handbook is designed to help developers secure their AI chatbots and protect against common vulnerabilities.</p>  
+            <img src="images/chatbot_intro.png" alt="Chatbot Security Introduction">  
+        </section>  
+        <section id="dos-attack" class="content">  
+            <h2>Denial of Service Attack & Solution</h2>  
+            <h3>What is a DoS Attack?</h3>  
+            <p>A Denial of Service (DoS) attack is a malicious attempt to disrupt the normal traffic of a targeted server, service, or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</p>  
+            <img src="images/dos_attack.png" alt="DoS Attack">  
+            <h3>Impact on AI Chatbots</h3>  
+            <p>DoS attacks can severely impact AI chatbots by making them unresponsive or slow, thereby affecting user experience and trust.</p>  
+            <h3>Rate Limiting as a Solution</h3>  
+            <p>Rate limiting is a technique used to control the rate of incoming requests to a server. By limiting the number of requests a user can make in a given time period, you can mitigate DoS attacks and ensure your chatbot remains responsive.</p>  
+            <button class="collapsible">View Code for Rate Limiting</button>  
+            <div class="collapsible-content">  
+                <div class="code-block">  
+<pre>  
+import os  
+import requests  
+import streamlit as st  
+from dotenv import load_dotenv  
+from collections import defaultdict  
+import time  
+import json  
+import psutil  
+  
+# Load environment variables from .env file  
+load_dotenv()  
+  
+# Configuration  
+AZURE_OPENAI_API_KEY = os.environ["AZURE_OPENAI_APIKEY"]  
+AZURE_OPENAI_ENDPOINT = os.environ["AZURE_OPENAI_ENDPOINT"] + "openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-02-15-preview"  
+RATE_LIMIT_PER_MINUTE = 5  
+BLOCK_DURATION = 60 * 5  # Block for 5 minutes after detecting DoS  
+MAX_REQUESTS_BEFORE_BLOCK = 3  # Number of rate limit breaches before blocking  
+LOG_FILE = "request_logs.txt"  # File to log the requests in text format  
+BLOCK_DATA_FILE = "block_data.json"  # File to store blocked IPs and request counts  
+REQUESTS_PER_SET = 10  # Number of requests per set for aggregation  
+  
+# Metrics tracking for visualization  
+if 'failed_requests' not in st.session_state:  
+    st.session_state.failed_requests = 0  
+if 'successful_requests' not in st.session_state:  
+    st.session_state.successful_requests = 0  
+if 'rate_limit_warnings' not in st.session_state:  
+    st.session_state.rate_limit_warnings = defaultdict(int)  
+if 'total_requests' not in st.session_state:  
+    st.session_state.total_requests = 0  
+if 'blocked_ips_count' not in st.session_state:  
+    st.session_state.blocked_ips_count = 0  
+if 'cpu_utilization_with_rl' not in st.session_state:  
+    st.session_state.cpu_utilization_with_rl = []  
+if 'cpu_utilization_without_rl' not in st.session_state:  
+    st.session_state.cpu_utilization_without_rl = []  
+if 'response_time_with_rl' not in st.session_state:  
+    st.session_state.response_time_with_rl = []  
+if 'response_time_without_rl' not in st.session_state:  
+    st.session_state.response_time_without_rl = []  
+if 'user_block_count' not in st.session_state:  
+    st.session_state.user_block_count = defaultdict(int)  # To track how many times each user was blocked  
+  
+# Function to save blocked IPs and request counts to a file  
+def save_block_data():  
+    block_data = {  
+        "blocked_ips": st.session_state.blocked_ips,  
+        "request_count": {ip: list(times) for ip, times in st.session_state.request_count.items()},  
+        "rate_limit_violations": dict(st.session_state.rate_limit_violations),  
+        "user_block_count": dict(st.session_state.user_block_count)  
+    }  
+    with open(BLOCK_DATA_FILE, "w") as file:  
+        json.dump(block_data, file)  
+  
+# Function to load blocked IPs and request counts from a file  
+def load_block_data():  
+    if os.path.exists(BLOCK_DATA_FILE):  
+        with open(BLOCK_DATA_FILE, "r") as file:  
+            block_data = json.load(file)  
+            st.session_state.blocked_ips = block_data.get("blocked_ips", {})  
+            st.session_state.request_count = defaultdict(list, block_data.get("request_count", {}))  
+            st.session_state.rate_limit_violations = defaultdict(int, block_data.get("rate_limit_violations", {}))  
+            st.session_state.user_block_count = defaultdict(int, block_data.get("user_block_count", {}))  
+    else:  
+        st.session_state.blocked_ips = {}  
+        st.session_state.request_count = defaultdict(list)  
+        st.session_state.rate_limit_violations = defaultdict(int)  
+        st.session_state.user_block_count = defaultdict(int)  
+  
+# Function to log requests and block information in a text file  
+def log_request(ip, status, message=""):  
+    current_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))  
+    log_message = f"{current_time} - IP: {ip} - Status: {status} - {message}\n"  
+    with open(LOG_FILE, mode="a") as file:  
+        file.write(log_message)  
+  
+# Function to send request to Azure OpenAI  
+def get_openai_response(user_message):  
+    headers = {  
+        "Content-Type": "application/json",  
+        "api-key": AZURE_OPENAI_API_KEY,  
+    }  
+  
+    # Construct the payload  
+    payload = {  
+        "messages": [  
+            {  
+                "role": "system",  
+                "content": [  
+                    {  
+                        "type": "text",  
+                        "text": "You are an AI assistant that helps people find information."  
+                    }  
+                ]  
+            },  
+            {  
+                "role": "user",  
+                "content": [  
+                    {  
+                        "type": "text",  
+                        "text": user_message  
+                    }  
+                ]  
+            }  
+        ],  
+        "temperature": 0.7,  
+        "top_p": 0.95,  
+        "max_tokens": 800  
+    }  
+  
+    # Send the request  
+    try:  
+        # Measure CPU utilization over a fixed interval before sending the request  
+        psutil.cpu_percent(interval=None)  # Discard the first call  
+        start_time = time.time()  
+  
+        response = requests.post(AZURE_OPENAI_ENDPOINT, headers=headers, json=payload)  
+        response.raise_for_status()  
+  
+        response_time = time.time() - start_time  
+        # Measure CPU utilization over a fixed interval after receiving the response  
+        cpu_utilization = psutil.cpu_percent(interval=1)  
+  
+        st.session_state.total_requests += 1  # Track total requests  
+        return response.json()['choices'][0]['message']['content'], response_time, cpu_utilization  
+    except requests.RequestException as e:  
+        st.error(f"Error making the request: {e}")  
+        st.session_state.failed_requests += 1  # Track failed requests  
+        st.session_state.total_requests += 1  # Track total requests  
+        return None, None, None  
+  
+# Load block data when the app starts  
+load_block_data()  
+  
+# Streamlit UI  
+st.title("Chatbot with Rate Limiting and DoS Protection")  
+  
+# Toggle for enabling or disabling rate limiting and DoS protection  
+use_rate_limiting = st.checkbox("Enable Rate Limiting and DoS Protection", value=True)  
+  
+user_input = st.text_area("Enter multiple queries (separated by newlines):", height=200)  
+# Simulate user IP (for testing purposes)  
+user_ip = st.session_state.get("user_ip", "127.0.0.1")  
+  
+# Check if the user is blocked  
+current_time = time.time()  
+if use_rate_limiting:  
+    if user_ip in st.session_state.blocked_ips and current_time < st.session_state.blocked_ips[user_ip]:  
+        st.error("Potential DoS attack detected. Your IP is temporarily blocked.")  
+        unblock_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(st.session_state.blocked_ips[user_ip]))  
+        log_request(user_ip, "Blocked", f"Blocked until {unblock_time}")  
+    else:  
+        # Clean up old requests older than 60 seconds  
+        st.session_state.request_count[user_ip] = [req for req in st.session_state.request_count[user_ip] if current_time - req < 60]  
+  
+        # Handle normal user input  
+        if user_input:  
+            queries = user_input.split("\n")  # Split the input into individual queries  
+            for query in queries:  
+                if query.strip():  
+                    # Check rate limit  
+                    if len(st.session_state.request_count[user_ip]) >= RATE_LIMIT_PER_MINUTE:  
+                        st.session_state.rate_limit_warnings[user_ip] += 1  
+                        if st.session_state.rate_limit_warnings[user_ip] == 1:  
+                            # First breach: Warn and stop  
+                            st.warning("Rate limit exceeded. Please wait 2 seconds before sending more queries.")  
+                            log_request(user_ip, "Rate limit exceeded", f"User input: {query.strip()}")  
+                            break  
+                        elif st.session_state.rate_limit_warnings[user_ip] == 2:  
+                            # Second breach: Warn and stop again  
+                            st.warning("Rate limit exceeded again. Please wait before sending more queries.")  
+                            log_request(user_ip, "Rate limit exceeded again", f"User input: {query.strip()}")  
+                            break  
+                        elif st.session_state.rate_limit_warnings[user_ip] >= 3:  
+                            # Third breach: Block the user for BLOCK_DURATION  
+                            st.session_state.blocked_ips[user_ip] = current_time + BLOCK_DURATION  
+                            st.session_state.blocked_ips_count += 1  # Track blocked IPs  
+                            st.session_state.user_block_count[user_ip] += 1  # Increment user block count  
+                            if st.session_state.user_block_count[user_ip] >= 3:  
+                                # Permanently block the user  
+                                st.session_state.blocked_ips[user_ip] = float('inf')  
+                                st.error("You have been permanently blocked due to repeated rate limit violations.")  
+                                log_request(user_ip, "Permanently Blocked", "User has been permanently blocked.")  
+                            else:  
+                                unblock_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(st.session_state.blocked_ips[user_ip]))  
+                                st.error(f"Potential DoS attack detected. Your IP is temporarily blocked until {unblock_time}.")  
+                                log_request(user_ip, "Blocked", f"Blocked until {unblock_time}")  
+                            save_block_data()  
+                            break  
+                    else:  
+                        st.session_state.request_count[user_ip].append(current_time)  
+                        response, response_time, cpu_utilization = get_openai_response(query.strip())  
+                        if response:  
+                            st.text(f"Bot: {response}")  
+                            st.session_state.successful_requests += 1  # Track successful requests  
+                            st.session_state.cpu_utilization_with_rl.append(cpu_utilization)  
+                            st.session_state.response_time_with_rl.append(response_time)  
+                        log_request(user_ip, "Success", f"User input: {query.strip()}")  
+else:  
+    # Handle user input without rate limiting  
+    if user_input:  
+        queries = user_input.split("\n")  # Split the input into individual queries  
+        for query in queries:  
+            if query.strip():  
+                response, response_time, cpu_utilization = get_openai_response(query.strip())  
+                if response:  
+                    st.text(f"Bot: {response}")  
+                    st.session_state.successful_requests += 1  # Track successful requests  
+                    st.session_state.cpu_utilization_without_rl.append(cpu_utilization)  
+                    st.session_state.response_time_without_rl.append(response_time)  
+                log_request(user_ip, "Success", f"User input: {query.strip()}")  
+  
+# Show Blocked Status  
+if st.button("Check Blocked Status"):  
+    current_time = time.time()  
+    if user_ip in st.session_state.blocked_ips and current_time < st.session_state.blocked_ips[user_ip]:  
+        st.write({  
+            "blocked": True,  
+            "unblock_time": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(st.session_state.blocked_ips[user_ip]))  
+        })  
+    elif user_ip in st.session_state.blocked_ips and st.session_state.blocked_ips[user_ip] == float('inf'):  
+        st.write({  
+            "blocked": True,  
+            "unblock_time": "Permanently blocked"  
+        })  
+    else:  
+        st.write({"blocked": False})  
+  
+# Show user block count  
+st.write(f"User has been blocked {st.session_state.user_block_count[user_ip]} times after hitting rate limit warnings.")  
+  
+# Aggregate CPU utilization and response time for bar charts  
+def aggregate_metrics(metrics, set_size):  
+    aggregated = []  
+    for i in range(0, len(metrics), set_size):  
+        set_metrics = metrics[i:i + set_size]  
+        if set_metrics:  
+            aggregated.append(sum(set_metrics) / len(set_metrics))  
+    return aggregated  
+  
+# Visualizations  
+st.header("Metrics Visualization")  
+  
+# CPU Utilization Bar Graph  
+st.subheader("Average CPU Utilization Per Set of Requests")  
+cpu_utilization_with_rl = aggregate_metrics(st.session_state.cpu_utilization_with_rl, REQUESTS_PER_SET)  
+cpu_utilization_without_rl = aggregate_metrics(st.session_state.cpu_utilization_without_rl, REQUESTS_PER_SET)  
+cpu_utilization_data = {  
+    "With Rate Limiting": cpu_utilization_with_rl,  
+    "Without Rate Limiting": cpu_utilization_without_rl  
+}  
+  
+# Bar chart for CPU utilization  
+st.bar_chart(cpu_utilization_data)  
+  
+# Response Time Bar Graph  
+st.subheader("Average Response Time Per Set of Requests")  
+response_time_with_rl = aggregate_metrics(st.session_state.response_time_with_rl, REQUESTS_PER_SET)  
+response_time_without_rl = aggregate_metrics(st.session_state.response_time_without_rl, REQUESTS_PER_SET)  
+response_time_data = {  
+    "With Rate Limiting": response_time_with_rl,  
+    "Without Rate Limiting": response_time_without_rl  
+}  
+  
+# Bar chart for response times  
+st.bar_chart(response_time_data)  
+  
+# Save block data before app closes or after any changes  
+save_block_data()  
+</pre>  
+                </div>  
+            </div>  
+            <h3>Try It Yourself</h3>  
+            <p>You can access the full code on our <a href="https://github.com/your-repo/
