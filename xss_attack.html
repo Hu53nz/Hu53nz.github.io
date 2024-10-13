@@ -1,1 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cross Site Scripting (XSS) Attack - Cybersecurity Handbook</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Cross Site Scripting (XSS) Attack</h1>
+    </header>
 
+    <nav>
+        <a href="index.html">Introduction</a>
+        <a href="prompt_injection.html">Prompt Injection Attack & Solution</a>
+        <a href="xss_attack.html">Cross Site Scripting Attack & Solution</a>
+        <a href="dos_attack.html">Denial of Service Attack & Solution</a>
+        <a href="conclusion.html">Other significant attacks</a>
+    </nav>
+
+    <div class="container">
+        <section id="XSS Attack">
+            <h2>What is a Cross-Site Scripting (XSS) Attack?</h2>
+            <p>An XSS attack occurs when an attacker injects malicious scripts into content from otherwise trusted websites.</p>
+            
+            <h3>Examples of XSS Attacks</h3>
+            <ul>
+                <li><strong>Stored XSS:</strong> Malicious script is stored on the server and executed when users visit the site.</li>
+                <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
+            </ul>
+            
+            <h3>Solutions to Prevent XSS Attacks</h3>
+            <ul>
+                <li><strong>Input Sanitization:</strong> Ensure user input is properly sanitized.</li>
+                <li><strong>Content Security Policy (CSP):</strong> Prevent execution of unauthorized scripts.</li>
+            </ul>
+            <img src="images/xss_attack_example.png" alt="XSS Attack Diagram">
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
