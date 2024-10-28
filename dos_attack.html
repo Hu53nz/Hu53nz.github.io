@@ -1,50 +1,46 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
-    <title>DoS Attack - Cybersecurity Handbook</title>  
-    <link rel="stylesheet" href="styles.css">  
-</head>  
-<body>  
-    <header>  
-        <h1>Denial of Service (DoS) Attack</h1>  
-    </header>  
-    <nav>  
-        <a href="index.html">Introduction</a>  
-        <a href="dos_attack.html">Denial of Service Attack & Solution</a>  
-        <a href="IPD.html">Insecure Plugin Design & Solution</a>  
-        <a href="prompt_injection.html">Prompt Injection Attack & Solution</a>  
-        <a href="xss_attack.html">Insecure Output Handling & Solution</a>  
-    </nav>  
-    <div class="container">  
-        <section id="DoS Attack">  
-            <h2>What is a DoS Attack?</h2>  
-            <p>A Denial of Service (DoS) attack is an attempt to make a machine or network resource unavailable to its intended users by overwhelming it with a flood of illegitimate requests.</p>  
-            <h3>Examples of DoS Attacks</h3>  
-            <ul>  
-                <li><strong>HTTP Flooding:</strong> Overwhelming the server with HTTP requests.</li>  
-                <li><strong>UDP Amplification:</strong> Exploiting open servers to amplify traffic.</li>  
-                <li><strong>Slowloris Attack:</strong> Keeping multiple connections open to exhaust resources.</li>  
-            </ul>  
-            <h3>Solutions to Prevent DoS Attacks</h3>  
-            <ul>  
-                <li><strong>Rate Limiting:</strong> Limit the number of requests a user can make.</li>  
-                <li><strong>CAPTCHA:</strong> Verify users with CAPTCHAs during high traffic.</li>  
-                <li><strong>Load Balancing:</strong> Distribute traffic across multiple servers.</li>  
-                <li><strong>WAF:</strong> Use Web Application Firewalls to block malicious traffic.</li>  
-            </ul>  
-            <img src="images/dos_attack_example.png" alt="DoS Attack Diagram">  
-  
-            <h2>DoS Attacks on Chatbots</h2>  
-            <p>Chatbots are increasingly becoming targets for DoS attacks due to their growing presence in customer service and other applications. A DoS attack on a chatbot can overwhelm the underlying server, causing it to become unresponsive and thereby disrupting service for legitimate users.</p>  
-  
-            <h3>Code Implementation for DoS Protection in Chatbots</h3>  
-            <p>The following code demonstrates how to implement rate limiting, IP blocking, and DoS protection for a chatbot using the Streamlit library in Python. You can access the code <a href="sample_chatbot_code.py" target="_blank">here</a>.</p>  
-  
-            <h3>How the Code Works</h3>  
-            <p>The code integrates several measures to protect a chatbot from DoS attacks:</p>  
-            <ul>  
-                <li><strong>Rate Limiting:</strong> This limits the number of requests a user can make within a certain period. The code sets a rate limit of 5 requests per minute. If a user exceeds this limit, they receive a warning. If they continue to exceed the limit, they get temporarily blocked for 5 minutes. After multiple violations, the user can be permanently blocked.</li>  
-                <li><strong
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DoS Attack - Cybersecurity Handbook</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Denial of Service (DoS) Attack</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Introduction</a>
+        <a href="dos_attack.html">Denial of Service Attack & Solution</a>
+        <a href="IPD.html">Insecure Plugin Design & Solution</a>
+        <a href="prompt_injection.html">Prompt Injection Attack & Solution</a>
+        <a href="xss_attack.html">Insecure Output Handling & Solution</a>
+    </nav>
+
+    <div class="container">
+        <section id="DoS Attack">
+            <h2>What is a DoS Attack on Chatbots?</h2>
+            <p>In chatbots, a Denial of Service (DoS) attack aims to overload the system, causing delays or crashes that make it unavailable for regular users. Attackers might send a high volume of requests to exploit resources or bypass limitations, potentially rendering the chatbot ineffective or even damaging its functionality.</p>
+            
+            <h3>DoS Attack Examples Targeting Chatbots</h3>
+            <ul>
+                <li><strong>HTTP Flooding:</strong> Bombarding the chatbot server with a large number of HTTP requests.</li>
+                <li><strong>UDP Amplification:</strong> Exploiting other open servers to amplify and flood the chatbot’s network.</li>
+                <li><strong>Slowloris Attack:</strong> Keeping multiple connections open to exhaust the chatbot’s available resources.</li>
+            </ul>
+            
+            <h3>Rate Limiting, IP Blocking, and DoS Detection Code</h3>
+            <p>To combat DoS attacks, this project implements a code-based solution with several core functions: rate limiting, IP blocking, and DoS detection. The code limits the number of requests from a single user, temporarily blocks IPs that exceed allowed requests, and provides metrics on usage and response times.</p>
+            <p><a href="code_example_link">View Code Implementation</a></p>
+            <img src="images/dos_attack_example.png" alt="DoS Attack Diagram">
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
