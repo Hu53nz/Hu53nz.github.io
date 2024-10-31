@@ -7,17 +7,15 @@
     <title>DoS Attack - Cybersecurity Handbook</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Add this style for centering and resizing the image */
         #DoSAttackImage {
-            display: block; /* Ensures the image is treated as a block element */
-            margin: 0 auto; /* Centers the image horizontally */
-            max-width: 50%; /* Adjust the size as needed */
-            height: auto; /* Maintains aspect ratio */
+            display: block;
+            margin: 0 auto;
+            max-width: 50%;
+            height: auto;
         }
 
-        /* Optional: Add some padding or margin to the section */
         #DoSAttackSection {
-            text-align: center; /* Center the text */
+            text-align: center;
         }
     </style>
 </head>
@@ -37,17 +35,24 @@
     <div class="container">
         <section id="DoSAttackSection">
             <h2>What is a DoS Attack on Chatbots?</h2>
-            <p>In chatbots, a Denial of Service (DoS) attack aims to overload the system, causing delays or crashes that make it unavailable for regular users. Attackers might send a high volume of requests to exploit resources or bypass limitations, potentially rendering the chatbot ineffective or even damaging its functionality.</p>
+            <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users. Attackers exploit this by sending numerous or high-resource requests, resulting in delayed responses or system crashes.</p>
             
             <h3>DoS Attack Examples Targeting Chatbots</h3>
             <ul>
-                <li><strong>HTTP Flooding:</strong> Bombarding the chatbot server with a large number of HTTP requests.</li>
-                <li><strong>UDP Amplification:</strong> Exploiting other open servers to amplify and flood the chatbot’s network.</li>
-                <li><strong>Slowloris Attack:</strong> Keeping multiple connections open to exhaust the chatbot’s available resources.</li>
+                <li><strong>HTTP Flooding:</strong> Overloading the server with excessive HTTP requests.</li>
+                <li><strong>UDP Amplification:</strong> Using open servers to magnify and direct network traffic toward the chatbot.</li>
+                <li><strong>Slowloris Attack:</strong> Keeping connections open to exhaust available resources.</li>
             </ul>
             
-            <h3>Rate Limiting, IP Blocking, and DoS Detection Code</h3>
-            <p>To combat DoS attacks, this project implements a code-based solution with several core functions: rate limiting, IP blocking, and DoS detection. The code limits the number of requests from a single user, temporarily blocks IPs that exceed allowed requests, and provides metrics on usage and response times.</p>
+            <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
+            <p>The chatbot system includes solutions to mitigate DoS attacks through:</p>
+            <ul>
+                <li><strong>Rate Limiting:</strong> Restricts requests per IP to a set maximum within 60 seconds, temporarily blocking those that exceed the limit and issuing warnings as they approach the cap.</li>
+                <li><strong>IP-Based Blocking:</strong> Tracks user IPs to identify and block suspicious activity, while allowing genuine users to access the chatbot.</li>
+                <li><strong>Persistent Data:</strong> Records blocked IPs and request counts in `block_data.json`, keeping blocking and rate limit status even after application restarts.</li>
+                <li><strong>Metrics Tracking:</strong> Monitors CPU usage and response times to detect unusual patterns, which may indicate DoS attacks.</li>
+            </ul>
+            <p>For full code implementation, view the code below:</p>
             <p><a href="code_example_link">View Code Implementation</a></p>
             <img id="DoSAttackImage" src="images/dos_attack_example.png" alt="DoS Attack Diagram">
         </section>
