@@ -45,12 +45,12 @@
             </ul>
             
             <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
-            <p>The chatbot system includes solutions to mitigate DoS attacks through:</p>
             <ul>
-                <li><strong>Rate Limiting:</strong> Restricts requests per IP to a set maximum within 60 seconds, temporarily blocking those that exceed the limit and issuing warnings as they approach the cap.</li>
-                <li><strong>IP-Based Blocking:</strong> Tracks user IPs to identify and block suspicious activity, while allowing genuine users to access the chatbot.</li>
-                <li><strong>Persistent Data:</strong> Records blocked IPs and request counts in `block_data.json`, keeping blocking and rate limit status even after application restarts.</li>
-                <li><strong>Metrics Tracking:</strong> Monitors CPU usage and response times to detect unusual patterns, which may indicate DoS attacks.</li>
+                <li><strong>Rate Limiting:</strong> Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period. Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
+                <li><strong>IP-Based DoS Protection:</strong> Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
+                <li><strong>Persistent Block and Rate Limit Data:</strong> Saves blocked IPs and request counts in `block_data.json` to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
+                <li><strong>Metrics Tracking for Incident Response:</strong> Tracks blocking counts for each IP, CPU usage, and response times. Abnormal metrics can indicate a DoS attack or performance issues.</li>
+                <li><strong>Error Handling and Logging:</strong> Logs each request, including violations, in `request_logs.txt` for auditing. Logs include IP actions and timestamps for effective monitoring and debugging.</li>
             </ul>
             <p>For full code implementation, view the code below:</p>
             <p><a href="code_example_link">View Code Implementation</a></p>
