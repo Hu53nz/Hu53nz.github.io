@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,16 +20,43 @@
             text-align: left;
         }
 
-        #DoSAttackImage {
-            flex: 0; /* Allow the image to not affect the text size */
-            max-width: 600px; /* Adjust as necessary */
+        #DoSAttackImage, .code-snippet img {
+            flex: 0;
+            max-width: 600px;
             height: auto;
-            margin-left: auto; /* Align the image to the right */
+            margin-left: auto;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
-        .code-snippet {
-            margin-top: 20px;
-            margin-bottom: 10px;
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            display: block;
+            margin: 5% auto;
+            max-width: 80%;
+            height: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -39,17 +67,17 @@
 
     <nav>
         <a href="index.html">Introduction</a>
-        <a href="dos_attack.html">Denial of Service Attack &amp; Solution</a>
-        <a href="IPD.html">Insecure Plugin Design &amp; Solution</a>
-        <a href="prompt_injection.html">Prompt Injection Attack &amp; Solution</a>
-        <a href="xss_attack.html">Insecure Output Handling &amp; Solution</a>
+        <a href="dos_attack.html">Denial of Service Attack & Solution</a>
+        <a href="IPD.html">Insecure Plugin Design & Solution</a>
+        <a href="prompt_injection.html">Prompt Injection Attack & Solution</a>
+        <a href="xss_attack.html">Insecure Output Handling & Solution</a>
     </nav>
 
     <div class="container">
         <section class="content-container">
             <div class="text-content">
                 <h2>What is a DoS Attack on Chatbots?</h2>
-                <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users. Attackers exploit this by sending numerous or high-resource requests, resulting in delayed responses or system crashes.</p>
+                <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users...</p>
                 
                 <h3>DoS Attack Examples Targeting Chatbots</h3>
                 <ul>
@@ -122,9 +150,41 @@
         </section>
     </div>
 
+    <!-- Modal for expandable image -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImage">
+    </div>
+
     <footer>
         <p>© 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        // Get the modal and image elements
+        const modal = document.getElementById("imageModal");
+        const expandedImg = document.getElementById("expandedImage");
+        const images = document.querySelectorAll(".expandable-image");
+
+        // Add click event to each image
+        images.forEach(img => {
+            img.addEventListener("click", function() {
+                modal.style.display = "block";
+                expandedImg.src = this.src;
+            });
+        });
+
+        // Close the modal when the close button is clicked
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicking outside the image
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
