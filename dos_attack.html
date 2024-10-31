@@ -7,15 +7,23 @@
     <title>DoS Attack - Cybersecurity Handbook</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        #DoSAttackImage {
-            display: block;
+        .content-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 1200px;
             margin: 0 auto;
-            max-width: 50%;
-            height: auto;
         }
 
-        #DoSAttackSection {
-            text-align: center;
+        .text-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        #DoSAttackImage {
+            flex: 0.5;
+            max-width: 400px; /* Adjust as necessary */
+            height: auto;
         }
     </style>
 </head>
@@ -33,27 +41,29 @@
     </nav>
 
     <div class="container">
-        <section id="DoSAttackSection">
-            <h2>What is a DoS Attack on Chatbots?</h2>
-            <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users. Attackers exploit this by sending numerous or high-resource requests, resulting in delayed responses or system crashes.</p>
-            
-            <h3>DoS Attack Examples Targeting Chatbots</h3>
-            <ul>
-                <li><strong>HTTP Flooding:</strong> Overloading the server with excessive HTTP requests.</li>
-                <li><strong>UDP Amplification:</strong> Using open servers to magnify and direct network traffic toward the chatbot.</li>
-                <li><strong>Slowloris Attack:</strong> Keeping connections open to exhaust available resources.</li>
-            </ul>
-            
-            <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
-            <ul>
-                <li><strong>Rate Limiting:</strong> Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period. Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
-                <li><strong>IP-Based DoS Protection:</strong> Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
-                <li><strong>Persistent Block and Rate Limit Data:</strong> Saves blocked IPs and request counts in `block_data.json` to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
-                <li><strong>Metrics Tracking for Incident Response:</strong> Tracks blocking counts for each IP, CPU usage, and response times. Abnormal metrics can indicate a DoS attack or performance issues.</li>
-                <li><strong>Error Handling and Logging:</strong> Logs each request, including violations, in `request_logs.txt` for auditing. Logs include IP actions and timestamps for effective monitoring and debugging.</li>
-            </ul>
-            <p>For full code implementation, view the code below:</p>
-            <p><a href="code_example_link">View Code Implementation</a></p>
+        <section class="content-container">
+            <div class="text-content">
+                <h2>What is a DoS Attack on Chatbots?</h2>
+                <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users. Attackers exploit this by sending numerous or high-resource requests, resulting in delayed responses or system crashes.</p>
+                
+                <h3>DoS Attack Examples Targeting Chatbots</h3>
+                <ul>
+                    <li><strong>HTTP Flooding:</strong> Overloading the server with excessive HTTP requests.</li>
+                    <li><strong>UDP Amplification:</strong> Using open servers to magnify and direct network traffic toward the chatbot.</li>
+                    <li><strong>Slowloris Attack:</strong> Keeping connections open to exhaust available resources.</li>
+                </ul>
+                
+                <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
+                <ul>
+                    <li><strong>Rate Limiting:</strong> Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period. Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
+                    <li><strong>IP-Based DoS Protection:</strong> Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
+                    <li><strong>Persistent Block and Rate Limit Data:</strong> Saves blocked IPs and request counts in `block_data.json` to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
+                    <li><strong>Metrics Tracking for Incident Response:</strong> Tracks blocking counts for each IP, CPU usage, and response times. Abnormal metrics can indicate a DoS attack or performance issues.</li>
+                    <li><strong>Error Handling and Logging:</strong> Logs each request, including violations, in `request_logs.txt` for auditing. Logs include IP actions and timestamps for effective monitoring and debugging.</li>
+                </ul>
+                <p>For full code implementation, view the code below:</p>
+                <p><a href="code_example_link">View Code Implementation</a></p>
+            </div>
             <img id="DoSAttackImage" src="images/dos_attack_example.png" alt="DoS Attack Diagram">
         </section>
     </div>
