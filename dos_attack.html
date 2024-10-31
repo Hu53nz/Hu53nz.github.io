@@ -1,4 +1,5 @@
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -19,9 +20,10 @@
         }
 
         #DoSAttackImage {
-            flex: 0.5;
+            flex: 0; /* Allow the image to not affect the text size */
             max-width: 600px; /* Adjust as necessary */
             height: auto;
+            margin-left: auto; /* Align the image to the right */
         }
     </style>
 </head>
@@ -53,52 +55,40 @@
                 
                 <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
                 <ul style="padding-left: 0; margin-left: 0;">
-    
-        <strong>Rate Limiting:</strong>
-        <ul style="padding-left: 20px; margin-left: 0;">
-            <li>Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period.</li>
-            <li>Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
-        </ul>
-    
-</ul>
-
-<ul style="padding-left: 0; margin-left: 0;">
-    
-        <strong>IP-Based DoS Protection:</strong>
-        <ul style="padding-left: 20px; margin-left: 0;">
-            <li>Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
-        </ul>
-    
-</ul>
-
-<ul style="padding-left: 0; margin-left: 0;">
-    
-        <strong>Persistent Block and Rate Limit Data:</strong>
-        <ul style="padding-left: 20px; margin-left: 0;">
-            <li>Saves blocked IPs and request counts in `block_data.json` to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
-        </ul>
-    
-</ul>
-
-<ul style="padding-left: 0; margin-left: 0;">
-    
-        <strong>Metrics Tracking for Incident Response:</strong>
-        <ul style="padding-left: 20px; margin-left: 0;">
-            <li>Tracks blocking counts for each IP, CPU usage, and response times.</li>
-            <li>Abnormal metrics can indicate a DoS attack or performance issues.</li>
-        </ul>
-    
-</ul>
-
-<ul style="padding-left: 0; margin-left: 0;">
-    
-        <strong>Error Handling and Logging:</strong>
-        <ul style="padding-left: 20px; margin-left: 0;">
-            <li>Logs each request, including violations, in `request_logs.txt` for auditing.</li>
-            <li>Logs include IP actions and timestamps for effective monitoring and debugging.</li>
-        </ul>
-    
-</ul>
+                    <li>
+                        <strong>Rate Limiting:</strong>
+                        <ul style="padding-left: 20px; margin-left: 0;">
+                            <li>Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period.</li>
+                            <li>Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>IP-Based DoS Protection:</strong>
+                        <ul style="padding-left: 20px; margin-left: 0;">
+                            <li>Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Persistent Block and Rate Limit Data:</strong>
+                        <ul style="padding-left: 20px; margin-left: 0;">
+                            <li>Saves blocked IPs and request counts in `block_data.json` to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Metrics Tracking for Incident Response:</strong>
+                        <ul style="padding-left: 20px; margin-left: 0;">
+                            <li>Tracks blocking counts for each IP, CPU usage, and response times.</li>
+                            <li>Abnormal metrics can indicate a DoS attack or performance issues.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Error Handling and Logging:</strong>
+                        <ul style="padding-left: 20px; margin-left: 0;">
+                            <li>Logs each request, including violations, in `request_logs.txt` for auditing.</li>
+                            <li>Logs include IP actions and timestamps for effective monitoring and debugging.</li>
+                        </ul>
+                    </li>
+                </ul>
 
                 <p>For full code implementation, view the code below:</p>
                 <p><a href="code_example_link">View Code Implementation</a></p>
@@ -111,5 +101,5 @@
         <p>© 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
     </footer>
 
-
-</body></html>
+</body>
+</html>
