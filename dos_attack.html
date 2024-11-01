@@ -7,29 +7,47 @@
     <title>DoS Attack - Cybersecurity Handbook</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header, nav, footer {
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 100%;
+            margin: 0;
+        }
+
         .content-container {
             display: flex;
+            flex-direction: row;
             align-items: flex-start;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 40px;
+            width: 100%;
         }
 
         .text-content {
-            flex: 2;
+            flex: 3;
             text-align: left;
         }
 
-        .image-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         #DoSAttackImage, .code-snippet img {
+            flex: 2;
             max-width: 100%;
             height: auto;
+            margin-left: auto;
             cursor: pointer;
             transition: transform 0.2s ease;
         }
@@ -64,13 +82,12 @@
             cursor: pointer;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
             .content-container {
                 flex-direction: column;
             }
 
-            .image-content {
+            #DoSAttackImage {
                 margin-top: 20px;
             }
         }
@@ -103,57 +120,57 @@
                 </ul>
                 
                 <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
-                <ul style="padding-left: 0; margin-left: 0;">
+                <ul>
                     <li>
                         <strong>Rate Limiting:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period.</li>
                             <li>Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
                         </ul>
                         <div class="code-snippet">
-                            <img src="images/rate_limiting.png" alt="Rate Limiting Code Snippet" class="expandable-image">
+                            <img src="images/rate_limiting.png" alt="Rate Limiting Code Snippet">
                             <p>This code checks if the user's IP address is currently blocked due to exceeding the rate limit. If the user is blocked, an error message is displayed, informing them of the temporary restriction.</p>
                         </div>
                     </li>
                     <li>
                         <strong>IP-Based DoS Protection:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
                         </ul>
                         <div class="code-snippet">
-                            <img src="images/ip_protection.png" alt="IP-Based DoS Protection Code Snippet" class="expandable-image">
+                            <img src="images/ip_protection.png" alt="IP-Based DoS Protection Code Snippet">
                             <p>This line cleans up old request timestamps older than 60 seconds for the user's IP address. This helps in tracking the number of requests made by the user within the rate limiting window.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Persistent Block and Rate Limit Data:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Saves blocked IPs and request counts in block_data.json to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
                         </ul>
                         <div class="code-snippet">
-                            <img src="images/persistent_data.png" alt="Persistent Block Data Code Snippet" class="expandable-image">
+                            <img src="images/persistent_data.png" alt="Persistent Block Data Code Snippet">
                             <p>This code snippet saves the blocked IPs and their request counts to a JSON file. This persistence allows the system to remember blocked users even after the application is restarted.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Metrics Tracking for Incident Response:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Tracks blocking counts for each IP, CPU usage, and response times.</li>
                             <li>Abnormal metrics can indicate a DoS attack or performance issues.</li>
                         </ul>
                         <div class="code-snippet">
-                            <img src="images/metrics_tracking.png" alt="Metrics Tracking Code Snippet" class="expandable-image">
+                            <img src="images/metrics_tracking.png" alt="Metrics Tracking Code Snippet">
                             <p>This line increments the total requests counter whenever a request is successfully processed. This metric can help in monitoring usage patterns and detecting anomalies.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Error Handling and Logging:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Logs each request, including violations, in request_logs.txt for auditing.</li>
                             <li>Logs include IP actions and timestamps for effective monitoring and debugging.</li>
                         </ul>
                         <div class="code-snippet">
-                            <img src="images/error_logging.png" alt="Error Handling and Logging Code Snippet" class="expandable-image">
+                            <img src="images/error_logging.png" alt="Error Handling and Logging Code Snippet">
                             <p>This code appends log messages about user requests and their statuses (successes, errors, or blocks) to a log file. This logging is crucial for monitoring system behavior and diagnosing issues.</p>
                         </div>
                     </li>
@@ -162,8 +179,8 @@
                 <p>For full code implementation, view the code below:</p>
                 <p><a href="code_example_link">View Code Implementation</a></p>
             </div>
-            <div class="image-content">
-                <img id="DoSAttackImage" src="images/dos_attack.png" alt="DoS Attack Diagram" class="expandable-image">
+            <div>
+                <img id="DoSAttackImage" src="images/dos_attack.png" alt="DoS Attack Diagram">
             </div>
         </section>
     </div>
