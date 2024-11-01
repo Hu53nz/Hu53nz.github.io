@@ -20,11 +20,7 @@
             text-align: left;
         }
 
-        #DoSAttackImage, .code-snippet img {
-            flex: 0;
-            max-width: 600px;
-            height: auto;
-            margin-left: auto;
+        .expandable-image {
             cursor: pointer;
             transition: transform 0.2s ease;
         }
@@ -87,58 +83,40 @@
                 </ul>
                 
                 <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
-                <ul style="padding-left: 0; margin-left: 0;">
+                <ul>
                     <li>
                         <strong>Rate Limiting:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
-                            <li>Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period.</li>
-                            <li>Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
-                        </ul>
                         <div class="code-snippet">
-                            <img src="images/rate_limiting.png" alt="Rate Limiting Code Snippet">
-                            <p>This code checks if the user's IP address is currently blocked due to exceeding the rate limit. If the user is blocked, an error message is displayed, informing them of the temporary restriction.</p>
+                            <img src="images/rate_limiting.png" alt="Rate Limiting Code Snippet" class="expandable-image">
+                            <p>This code checks if the user's IP address is currently blocked due to exceeding the rate limit.</p>
                         </div>
                     </li>
                     <li>
                         <strong>IP-Based DoS Protection:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
-                            <li>Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
-                        </ul>
                         <div class="code-snippet">
-                            <img src="images/ip_protection.png" alt="IP-Based DoS Protection Code Snippet">
-                            <p>This line cleans up old request timestamps older than 60 seconds for the user's IP address. This helps in tracking the number of requests made by the user within the rate limiting window.</p>
+                            <img src="images/ip_protection.png" alt="IP-Based DoS Protection Code Snippet" class="expandable-image">
+                            <p>This line cleans up old request timestamps older than 60 seconds for the user's IP address.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Persistent Block and Rate Limit Data:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
-                            <li>Saves blocked IPs and request counts in block_data.json to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
-                        </ul>
                         <div class="code-snippet">
-                            <img src="images/persistent_data.png" alt="Persistent Block Data Code Snippet">
-                            <p>This code snippet saves the blocked IPs and their request counts to a JSON file. This persistence allows the system to remember blocked users even after the application is restarted.</p>
+                            <img src="images/persistent_data.png" alt="Persistent Block Data Code Snippet" class="expandable-image">
+                            <p>This code snippet saves the blocked IPs and their request counts to a JSON file.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Metrics Tracking for Incident Response:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
-                            <li>Tracks blocking counts for each IP, CPU usage, and response times.</li>
-                            <li>Abnormal metrics can indicate a DoS attack or performance issues.</li>
-                        </ul>
                         <div class="code-snippet">
-                            <img src="images/metrics_tracking.png" alt="Metrics Tracking Code Snippet">
-                            <p>This line increments the total requests counter whenever a request is successfully processed. This metric can help in monitoring usage patterns and detecting anomalies.</p>
+                            <img src="images/metrics_tracking.png" alt="Metrics Tracking Code Snippet" class="expandable-image">
+                            <p>This line increments the total requests counter whenever a request is successfully processed.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Error Handling and Logging:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
-                            <li>Logs each request, including violations, in request_logs.txt for auditing.</li>
-                            <li>Logs include IP actions and timestamps for effective monitoring and debugging.</li>
-                        </ul>
                         <div class="code-snippet">
-                            <img src="images/error_logging.png" alt="Error Handling and Logging Code Snippet">
-                            <p>This code appends log messages about user requests and their statuses (successes, errors, or blocks) to a log file. This logging is crucial for monitoring system behavior and diagnosing issues.</p>
+                            <img src="images/error_logging.png" alt="Error Handling and Logging Code Snippet" class="expandable-image">
+                            <p>This code appends log messages about user requests and their statuses.</p>
                         </div>
                     </li>
                 </ul>
@@ -146,11 +124,11 @@
                 <p>For full code implementation, view the code below:</p>
                 <p><a href="code_example_link">View Code Implementation</a></p>
             </div>
-            <img id="DoSAttackImage" src="images/dos_attack.png" alt="DoS Attack Diagram">
+            <img id="DoSAttackImage" src="images/dos_attack.png" alt="DoS Attack Diagram" class="expandable-image">
         </section>
     </div>
 
-    <!-- Modal for expandable image -->
+    <!-- Modal for expandable images -->
     <div id="imageModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
         <img class="modal-content" id="expandedImage">
@@ -161,7 +139,7 @@
     </footer>
 
     <script>
-        // Get the modal and image elements
+        // Get modal and image elements
         const modal = document.getElementById("imageModal");
         const expandedImg = document.getElementById("expandedImage");
         const images = document.querySelectorAll(".expandable-image");
@@ -174,12 +152,12 @@
             });
         });
 
-        // Close the modal when the close button is clicked
+        // Close modal function
         function closeModal() {
             modal.style.display = "none";
         }
 
-        // Close the modal when clicking outside the image
+        // Close modal when clicking outside of the image
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
