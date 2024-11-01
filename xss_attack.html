@@ -4,12 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cross Site Scripting (XSS) Attack - Cybersecurity Handbook</title>
+    <title>Cross-Site Scripting (XSS) Attack - Cybersecurity Handbook</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header, nav, footer {
+            padding: 20px;
+            background-color: #d3d3d3;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 100%;
+            margin: 0;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 40px;
+            width: 100%;
+        }
+
+        .text-content {
+            flex: 3;
+            text-align: left;
+        }
+
+        #XSSAttackImage, .code-snippet img {
+            flex: 2;
+            max-width: 100%;
+            height: auto;
+            margin-left: auto;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            display: block;
+            margin: 5% auto;
+            max-width: 80%;
+            height: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+
+            #XSSAttackImage {
+                margin-top: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Cross Site Scripting (XSS) Attack</h1>
+        <h1>Cross-Site Scripting (XSS) Attack</h1>
     </header>
 
     <nav>
@@ -21,27 +107,107 @@
     </nav>
 
     <div class="container">
-        <section id="Insecure Output Handling & Solution">
-            <h2>What is a Cross-Site Scripting (XSS) Attack?</h2>
-            <p>An XSS attack occurs when an attacker injects malicious scripts into content from otherwise trusted websites.</p>
-            
-            <h3>Examples of XSS Attacks</h3>
-            <ul>
-                <li><strong>Stored XSS:</strong> Malicious script is stored on the server and executed when users visit the site.</li>
-                <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
-            </ul>
-            
-            <h3>Solutions to Prevent XSS Attacks</h3>
-            <ul>
-                <li><strong>Input Sanitization:</strong> Ensure user input is properly sanitized.</li>
-                <li><strong>Content Security Policy (CSP):</strong> Prevent execution of unauthorized scripts.</li>
-            </ul>
-            <img src="images/xss_attack_example.png" alt="XSS Attack Diagram">
+        <section class="content-container">
+            <div class="text-content">
+                <h2>What is a Cross-Site Scripting (XSS) Attack?</h2>
+                <p>An XSS attack occurs when an attacker injects malicious scripts into content from otherwise trusted websites.</p>
+                
+                <h3>Examples of XSS Attacks</h3>
+                <ul>
+                    <li><strong>Stored XSS:</strong> Malicious script is stored on the server and executed when users visit the site.</li>
+                    <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
+                </ul>
+                
+                <li>
+    <h3>Solutions to prevent Insecure outputs</h3>
+    <strong>HTML Character Escaping (html.escape)</strong>
+    <ul>
+        <li>Transforms characters like `<`, `>`, `&` into their HTML-encoded equivalents (`&lt;`, `&gt;`, `&amp;`) to prevent them from being interpreted as code.</li>
+    </ul>
+    <div class="code-snippet">
+        <img src="images/html_character_escaping.png" alt="HTML Character Escaping Code Snippet">
+        <p>The html.escape() function converts special characters in the output string (e.g., <, >, &) into HTML-safe representations (&lt;, &gt;, &amp;).
+This helps prevent Cross-Site Scripting (XSS) attacks by ensuring that any potentially dangerous HTML or JavaScript code in the output is not executed by the client browser but instead displayed as text.</p>
+    </div>
+</li>
+<li>
+    <strong>Regular Expression Filtering (re.sub())</strong>
+    <ul>
+        <li>Uses regular expressions to filter out potentially harmful patterns such as script tags and on-event handlers.</li>
+    </ul>
+    <div class="code-snippet">
+        <img src="images/regex_filtering.png" alt="Regular Expression Filtering Code Snippet">
+        <p>The re.sub() function searches for potentially harmful command phrases such as ls, rm, exec, cmd, or script file extensions (.sh, .exe) and replaces them with [REDACTED].
+The flags=re.IGNORECASE ensures the pattern matching is case-insensitive, providing a more comprehensive sanitization.
+This prevents output from containing potentially dangerous command strings that could encourage a command injection scenario.</p>
+    </div>
+</li>
+<li>
+    <strong>Input Validation:</strong>
+    <ul>
+        <li>Validates input to ensure it matches the expected format (e.g., text only, no special characters).</li>
+    </ul>
+    <div class="code-snippet">
+        <img src="images/input_validation1.png" alt="Input Validation Code Snippet">
+        <p>The input validation step ensures that the question provided to the model is a string and not excessively long (e.g., limited to 1000 characters).
+This prevents potential abuse through buffer overflow attacks or submission of malformed data that could disrupt the system's behavior.</p>
+    </div>
+</li>
+                <strong>Additional Solution: Implementing CSP</strong>
+                <div class="code-snippet">
+                    <img src="images/csp_example.png" alt="CSP Code Snippet">
+                    <p>Implementing a Content Security Policy (CSP) restricts script sources to trusted domains, reducing the risk of executing malicious code. This block sets the CSP header in the HTTP response. The policy defined here includes:
+default-src 'self';: This directive allows resources (like scripts, styles, and images) to be loaded only from the same origin as the page. No external resources are allowed.
+script-src 'self';: This specifically restricts scripts to only those loaded from the same origin.
+style-src 'self';: This restricts stylesheets to those loaded from the same origin.
+img-src 'self' data:;: This allows images to be loaded from the same origin and also allows inline images (like base64 encoded images).
+frame-ancestors 'none';: This prevents the webpage from being embedded in a frame or iframe, which can protect against clickjacking attacks.</p>
+                </div>
+
+                <p>For full code implementation, view the code below:</p>
+                <p><a href="code_example_link">View Code Implementation</a></p>
+            </div>
+            <div>
+                <img id="XSSAttackImage" src="images/xss_attack_example.png" alt="XSS Attack Diagram">
+            </div>
         </section>
+    </div>
+
+    <!-- Modal for expandable image -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImage">
     </div>
 
     <footer>
         <p>&copy; 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
     </footer>
+
+    <script>
+        // Get the modal and image elements
+        const modal = document.getElementById("imageModal");
+        const expandedImg = document.getElementById("expandedImage");
+        const images = document.querySelectorAll(".expandable-image");
+
+        // Add click event to each image
+        images.forEach(img => {
+            img.addEventListener("click", function() {
+                modal.style.display = "block";
+                expandedImg.src = this.src;
+            });
+        });
+
+        // Close the modal when the close button is clicked
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicking outside the image
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
