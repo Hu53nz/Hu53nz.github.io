@@ -15,7 +15,7 @@
 
         header, nav, footer {
             padding: 20px;
-            background-color: #d3d3d3; /* Same header background color */
+            background-color: #d3d3d3; /* Match the header background color from DoS Attack */
         }
 
         nav a {
@@ -120,13 +120,31 @@
                 
                 <h3>Solutions to Prevent Prompt Injection Attacks</h3>
                 <ul>
-                    <li><strong>Input Validation:</strong> Ensure prompts are validated before being processed.</li>
-                    <li><strong>Context Management:</strong> Limit the context that prompts can influence.</li>
+                    <li>
+                        <strong>Input Validation:</strong>
+                        <p>Ensure prompts are validated before being processed to prevent unexpected commands. Input validation in this context refers to checking user input for any prohibited terms before processing it. This is shown in the code with the use of filter_content() and contains_prohibited_terms() functions.</p>
+                        <div class="code-snippet">
+                            <img src="images/input_validation.png" alt="Input Validation Code Snippet">
+                            <p>Before processing the user input, the code checks if it contains any prohibited words. If it does, the input is flagged, and the chatbot returns a warning message without invoking the model.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Context Management:</strong>
+                        <p>Context management involves keeping a record of past interactions so that the chatbot can use this information to maintain a coherent conversation. The context is updated after each user interaction, provided that both the input and the bot response do not contain prohibited terms.</p>
+                        <div class="code-snippet">
+                            <img src="images/context_management.png" alt="Context Management Code Snippet">
+                            <p>The context variable holds the conversation history. It is concatenated with new user inputs and bot responses to maintain a consistent interaction.
+The ask_model_with_context() function takes the existing context, appends the new user input, and sends it to the model.
+If both the user input and bot response pass the validation checks, they are added to the context.</p>
+                        </div>
+                    </li>
                 </ul>
-                <div class="code-snippet">
-                    <img src="images/prompt_injection_example.png" alt="Prompt Injection Attack Diagram">
-                    <p>This image demonstrates how prompt injection can occur when inputs are not properly sanitized.</p>
-                </div>
+
+                <p>For full code implementation, view the code below:</p>
+                <p><a href="code_example_link">View Code Implementation</a></p>
+            </div>
+            <div>
+                <img id="PromptInjectionImage" src="images/prompt_injection.png" alt="Prompt Injection Attack Diagram">
             </div>
         </section>
     </div>
