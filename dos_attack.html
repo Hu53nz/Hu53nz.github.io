@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,29 +7,89 @@
     <title>DoS Attack - Cybersecurity Handbook</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header, nav, footer {
+            padding: 20px;
+            background-color: #d3d3d3; /* Match the header background color from index.html */
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 100%;
+            margin: 0;
+        }
+
         .content-container {
             display: flex;
+            flex-direction: row;
             align-items: flex-start;
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 40px;
+            width: 100%;
         }
 
         .text-content {
-            flex: 1;
+            flex: 3;
             text-align: left;
         }
 
-        #DoSAttackImage {
-            flex: 0; /* Allow the image to not affect the text size */
-            max-width: 600px; /* Adjust as necessary */
+        #DoSAttackImage, .code-snippet img {
+            flex: 2;
+            max-width: 100%;
             height: auto;
-            margin-left: auto; /* Align the image to the right */
+            margin-left: auto;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
-        .code-snippet {
-            margin-top: 20px;
-            margin-bottom: 10px;
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            display: block;
+            margin: 5% auto;
+            max-width: 80%;
+            height: auto;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+
+            #DoSAttackImage {
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
@@ -39,17 +100,17 @@
 
     <nav>
         <a href="index.html">Introduction</a>
-        <a href="dos_attack.html">Denial of Service Attack &amp; Solution</a>
-        <a href="IPD.html">Insecure Plugin Design &amp; Solution</a>
-        <a href="prompt_injection.html">Prompt Injection Attack &amp; Solution</a>
-        <a href="xss_attack.html">Insecure Output Handling &amp; Solution</a>
+        <a href="dos_attack.html">Denial of Service Attack & Solution</a>
+        <a href="IPD.html">Insecure Plugin Design & Solution</a>
+        <a href="prompt_injection.html">Prompt Injection Attack & Solution</a>
+        <a href="xss_attack.html">Insecure Output Handling & Solution</a>
     </nav>
 
     <div class="container">
         <section class="content-container">
             <div class="text-content">
                 <h2>What is a DoS Attack on Chatbots?</h2>
-                <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users. Attackers exploit this by sending numerous or high-resource requests, resulting in delayed responses or system crashes.</p>
+                <p>A Denial of Service (DoS) attack aims to overload a chatbot system by flooding it with requests, exhausting resources, and making it unresponsive to legitimate users...</p>
                 
                 <h3>DoS Attack Examples Targeting Chatbots</h3>
                 <ul>
@@ -59,10 +120,10 @@
                 </ul>
                 
                 <h3>Solution: Implementing Rate Limiting, IP Blocking, and DoS Detection</h3>
-                <ul style="padding-left: 0; margin-left: 0;">
+                <ul>
                     <li>
                         <strong>Rate Limiting:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Limits requests to a set maximum (RATE_LIMIT_PER_MINUTE) per IP within a 60-second period.</li>
                             <li>Users receive warnings as they near the limit, with temporary blocking for excessive requests, and permanent blocking after multiple violations.</li>
                         </ul>
@@ -73,7 +134,7 @@
                     </li>
                     <li>
                         <strong>IP-Based DoS Protection:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Tracks user IPs to differentiate between legitimate users and potential attackers, blocking IPs that abuse the system.</li>
                         </ul>
                         <div class="code-snippet">
@@ -83,7 +144,7 @@
                     </li>
                     <li>
                         <strong>Persistent Block and Rate Limit Data:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Saves blocked IPs and request counts in block_data.json to maintain states even after application restarts, preventing flagged IPs from bypassing restrictions.</li>
                         </ul>
                         <div class="code-snippet">
@@ -93,7 +154,7 @@
                     </li>
                     <li>
                         <strong>Metrics Tracking for Incident Response:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Tracks blocking counts for each IP, CPU usage, and response times.</li>
                             <li>Abnormal metrics can indicate a DoS attack or performance issues.</li>
                         </ul>
@@ -104,7 +165,7 @@
                     </li>
                     <li>
                         <strong>Error Handling and Logging:</strong>
-                        <ul style="padding-left: 20px; margin-left: 0;">
+                        <ul>
                             <li>Logs each request, including violations, in request_logs.txt for auditing.</li>
                             <li>Logs include IP actions and timestamps for effective monitoring and debugging.</li>
                         </ul>
@@ -118,13 +179,47 @@
                 <p>For full code implementation, view the code below:</p>
                 <p><a href="code_example_link">View Code Implementation</a></p>
             </div>
-            <img id="DoSAttackImage" src="images/dos_attack.png" alt="DoS Attack Diagram">
+            <div>
+                <img id="DoSAttackImage" src="images/dos_attack.png" alt="DoS Attack Diagram">
+            </div>
         </section>
+    </div>
+
+    <!-- Modal for expandable image -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="expandedImage">
     </div>
 
     <footer>
         <p>© 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
     </footer>
 
+    <script>
+        // Get the modal and image elements
+        const modal = document.getElementById("imageModal");
+        const expandedImg = document.getElementById("expandedImage");
+        const images = document.querySelectorAll(".expandable-image");
+
+        // Add click event to each image
+        images.forEach(img => {
+            img.addEventListener("click", function() {
+                modal.style.display = "block";
+                expandedImg.src = this.src;
+            });
+        });
+
+        // Close the modal when the close button is clicked
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Close the modal when clicking outside the image
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
