@@ -91,6 +91,15 @@
                 margin-top: 20px;
             }
         }
+
+        .example-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .example {
+            width: 45%;
+        }
     </style>
 </head>
 <body>
@@ -118,56 +127,62 @@
                     <li><strong>Stored XSS:</strong> Malicious script is stored on the server and executed when users visit the site.</li>
                     <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
                 </ul>
-                <div class="text-content">
-    <h3>Before Input Sanitization</h3>
-    <ul>
-        <li><strong>Test Case 1:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
-            <em>Bot Response:</em> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
-            <script>alert('XSS')</script><br>
-            Potential vulnerability detected!
-        </li>
-        <li><strong>Test Case 2:</strong> '; DROP TABLE users;--<br>
-            <em>Bot Response:</em> '; DROP TABLE users;--<br>
-            Potential vulnerability detected!
-        </li>
-        <li><strong>Test Case 3:</strong> ; ls<br>
-            <em>Bot Response:</em> ; ls.asm<br>
-            Potential vulnerability detected!
-        </li>
-        <li><strong>Test Case 4:</strong> && cat /etc/passwd<br>
-            <em>Bot Response:</em> && cat /etc/passwd | grep -v root ...<br>
-            Potential vulnerability detected!
-        </li>
-        <li><strong>Test Case 5:</strong> &lt;img src='x' onerror='alert(1)'&gt;<br>
-            <em>Bot Response:</em> &lt;img src='x' onerror='alert(1)'&gt;<br>
-            Potential vulnerability detected!
-        </li>
-    </ul>
 
-    <h3>After Input Sanitization</h3>
-    <ul>
-        <li><strong>Test Case 1:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
-            <em>Bot Response:</em> &lt;script&gt;alert(&#x27;XSS&#x27;)&lt;/script&gt;<br>
-            Output appears to be sanitized.
-        </li>
-        <li><strong>Test Case 2:</strong> '; DROP TABLE users;--<br>
-            <em>Bot Response:</em> &#x27;; DROP TABLE users;--<br>
-            Output appears to be sanitized.
-        </li>
-        <li><strong>Test Case 3:</strong> ; ls<br>
-            <em>Bot Response:</em> ; [REDACTED].asm<br>
-            Output appears to be sanitized.
-        </li>
-        <li><strong>Test Case 4:</strong> && cat /etc/passwd<br>
-            <em>Bot Response:</em> &amp;&amp; cat /etc/passwd ...<br>
-            Output appears to be sanitized.
-        </li>
-        <li><strong>Test Case 5:</strong> &lt;img src='x' onerror='alert(1)'&gt;<br>
-            <em>Bot Response:</em> &lt;img src=&#x27;x&#x27; onerror=&#x27;alert(1)&#x27;&gt;<br>
-            Output appears to be sanitized.
-        </li>
-    </ul>
-</div>
+                <h3>Before and After Input Sanitization</h3>
+                <div class="example-container">
+                    <div class="example">
+                        <h4>Before Input Sanitization</h4>
+                        <ul>
+                            <li><strong>Test Case 1:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+                                <em>Bot Response:</em> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+                                <script>alert('XSS')</script><br>
+                                <p><strong>Explanation:</strong> This output is dangerous because the script tag is executed, triggering the JavaScript code and potentially compromising user data or control over the website.</p>
+                            </li>
+                            <li><strong>Test Case 2:</strong> '; DROP TABLE users;--<br>
+                                <em>Bot Response:</em> '; DROP TABLE users;--<br>
+                                <p><strong>Explanation:</strong> This input can lead to a SQL injection attack, where the attacker can delete the user table or perform other malicious database operations.</p>
+                            </li>
+                            <li><strong>Test Case 3:</strong> ; ls<br>
+                                <em>Bot Response:</em> ; ls.asm<br>
+                                <p><strong>Explanation:</strong> This input may allow the attacker to execute system commands and list sensitive files on the server.</p>
+                            </li>
+                            <li><strong>Test Case 4:</strong> && cat /etc/passwd<br>
+                                <em>Bot Response:</em> && cat /etc/passwd | grep -v root ...<br>
+                                <p><strong>Explanation:</strong> This input can exploit shell injection vulnerabilities, potentially allowing access to sensitive files like /etc/passwd on Unix-based systems.</p>
+                            </li>
+                            <li><strong>Test Case 5:</strong> &lt;img src='x' onerror='alert(1)'&gt;<br>
+                                <em>Bot Response:</em> &lt;img src='x' onerror='alert(1)'&gt;<br>
+                                <p><strong>Explanation:</strong> This could trigger an image error event, running arbitrary JavaScript that could harm the system or compromise user data.</p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="example">
+                        <h4>After Input Sanitization</h4>
+                        <ul>
+                            <li><strong>Test Case 1:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+                                <em>Bot Response:</em> &lt;script&gt;alert(&#x27;XSS&#x27;)&lt;/script&gt;<br>
+                                <p>Output appears to be sanitized.</p>
+                            </li>
+                            <li><strong>Test Case 2:</strong> '; DROP TABLE users;--<br>
+                                <em>Bot Response:</em> &#x27;; DROP TABLE users;--<br>
+                                <p>Output appears to be sanitized.</p>
+                            </li>
+                            <li><strong>Test Case 3:</strong> ; ls<br>
+                                <em>Bot Response:</em> ; [REDACTED].asm<br>
+                                <p>Output appears to be sanitized.</p>
+                            </li>
+                            <li><strong>Test Case 4:</strong> && cat /etc/passwd<br>
+                                <em>Bot Response:</em> &amp;&amp; cat /etc/passwd ...<br>
+                                <p>Output appears to be sanitized.</p>
+                            </li>
+                            <li><strong>Test Case 5:</strong> &lt;img src='x' onerror='alert(1)'&gt;<br>
+                                <em>Bot Response:</em> &lt;img src=&#x27;x&#x27; onerror=&#x27;alert(1)&#x27;&gt;<br>
+                                <p>Output appears to be sanitized.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
                 <h3>Solutions to Prevent Insecure Outputs</h3>
 
@@ -179,8 +194,6 @@
                     <img src="images/html_character_escaping.png" alt="HTML Character Escaping Code Snippet">
                     <p>The html.escape() function converts special characters in the output string (e.g., <, >, &) into HTML-safe representations (&lt;, &gt;, &amp;), preventing XSS attacks by rendering potentially dangerous code as text.</p>
                 </div>
-                <p><strong>Test Explanation:</strong> 
-                   This code was tested by injecting HTML and JavaScript tags in a sample input to confirm they are displayed as text, not executed. This protects against XSS, ensuring special characters are neutralized.</p>
 
                 <h4>2. Regular Expression Filtering (re.sub())</h4>
                 <ul>
@@ -190,69 +203,38 @@
                     <img src="images/regex_filtering.png" alt="Regular Expression Filtering Code Snippet">
                     <p>The re.sub() function identifies harmful command phrases like `exec`, `cmd`, or `.sh` extensions and replaces them, protecting against command injections.</p>
                 </div>
-                <p><strong>Test Explanation:</strong> 
-                   Various malicious input patterns (e.g., JavaScript event handlers and shell commands) were submitted to confirm they are sanitized or replaced with [REDACTED]. This ensures such code isn’t executed if inserted.</p>
 
                 <h4>3. Input Validation</h4>
                 <ul>
-                    <li>Validates input to ensure it matches the expected format (e.g., text only, no special characters).</li>
+                    <li>Validates user inputs against a whitelist of acceptable values to ensure that only expected data is processed by the application.</li>
                 </ul>
-                <div class="code-snippet">
-                    <img src="images/input_validation1.png" alt="Input Validation Code Snippet">
-                    <p>Input validation ensures that data entered matches expected formats and limits input length, preventing abuses like buffer overflow or malformed data submission.</p>
-                </div>
-                <p><strong>Test Explanation:</strong> 
-                   Input exceeding 1000 characters and non-alphanumeric symbols were tested, confirming that inputs are rejected or trimmed to match safe format constraints.</p>
-
-                <h4>4. Additional Solution: Implementing CSP</h4>
-                <div class="code-snippet">
-                    <img src="images/csp_example.png" alt="CSP Code Snippet">
-                    <p>A Content Security Policy (CSP) restricts resources (scripts, styles) to trusted sources, mitigating risks of executing external malicious code.</p>
-                </div>
-                <p><strong>Test Explanation:</strong> 
-                   CSP was implemented, and attempts to load scripts from external sources were blocked, as verified in browser developer tools. This shows effective prevention of unauthorized script execution from outside domains.</p>
-
-                <p>For full code implementation, view the code below:</p>
-                <p><a href="code_example_link">View Code Implementation</a></p>
             </div>
-            
+            <img src="images/xss_attack_example.png" id="XSSAttackImage" alt="XSS Attack Image">
         </section>
     </div>
 
-    <!-- Modal for expandable image -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="expandedImage">
-    </div>
-
     <footer>
-        <p>&copy; 2024 Cybersecurity Handbook for AI Chatbots. All Rights Reserved.</p>
+        <p>Cybersecurity Handbook - XSS Attack</p>
     </footer>
 
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
     <script>
-        // Get the modal and image elements
-        const modal = document.getElementById("imageModal");
-        const expandedImg = document.getElementById("expandedImage");
-        const images = document.querySelectorAll(".expandable-image");
+        const img = document.getElementById('XSSAttackImage');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const close = document.getElementsByClassName('close')[0];
 
-        // Add click event to each image
-        images.forEach(img => {
-            img.addEventListener("click", function() {
-                modal.style.display = "block";
-                expandedImg.src = this.src;
-            });
-        });
-
-        // Close the modal when the close button is clicked
-        function closeModal() {
-            modal.style.display = "none";
+        img.onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = img.src;
         }
 
-        // Close the modal when clicking outside the image
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
+        close.onclick = function() {
+            modal.style.display = "none";
         }
     </script>
 </body>
