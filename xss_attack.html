@@ -118,6 +118,56 @@
                     <li><strong>Stored XSS:</strong> Malicious script is stored on the server and executed when users visit the site.</li>
                     <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
                 </ul>
+                <div class="text-content">
+    <h3>Before Input Sanitization</h3>
+    <ul>
+        <li><strong>Test Case 1:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+            <em>Bot Response:</em> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+            <script>alert('XSS')</script><br>
+            Potential vulnerability detected!
+        </li>
+        <li><strong>Test Case 2:</strong> '; DROP TABLE users;--<br>
+            <em>Bot Response:</em> '; DROP TABLE users;--<br>
+            Potential vulnerability detected!
+        </li>
+        <li><strong>Test Case 3:</strong> ; ls<br>
+            <em>Bot Response:</em> ; ls.asm<br>
+            Potential vulnerability detected!
+        </li>
+        <li><strong>Test Case 4:</strong> && cat /etc/passwd<br>
+            <em>Bot Response:</em> && cat /etc/passwd | grep -v root ...<br>
+            Potential vulnerability detected!
+        </li>
+        <li><strong>Test Case 5:</strong> &lt;img src='x' onerror='alert(1)'&gt;<br>
+            <em>Bot Response:</em> &lt;img src='x' onerror='alert(1)'&gt;<br>
+            Potential vulnerability detected!
+        </li>
+    </ul>
+
+    <h3>After Input Sanitization</h3>
+    <ul>
+        <li><strong>Test Case 1:</strong> &lt;script&gt;alert('XSS')&lt;/script&gt;<br>
+            <em>Bot Response:</em> &lt;script&gt;alert(&#x27;XSS&#x27;)&lt;/script&gt;<br>
+            Output appears to be sanitized.
+        </li>
+        <li><strong>Test Case 2:</strong> '; DROP TABLE users;--<br>
+            <em>Bot Response:</em> &#x27;; DROP TABLE users;--<br>
+            Output appears to be sanitized.
+        </li>
+        <li><strong>Test Case 3:</strong> ; ls<br>
+            <em>Bot Response:</em> ; [REDACTED].asm<br>
+            Output appears to be sanitized.
+        </li>
+        <li><strong>Test Case 4:</strong> && cat /etc/passwd<br>
+            <em>Bot Response:</em> &amp;&amp; cat /etc/passwd ...<br>
+            Output appears to be sanitized.
+        </li>
+        <li><strong>Test Case 5:</strong> &lt;img src='x' onerror='alert(1)'&gt;<br>
+            <em>Bot Response:</em> &lt;img src=&#x27;x&#x27; onerror=&#x27;alert(1)&#x27;&gt;<br>
+            Output appears to be sanitized.
+        </li>
+    </ul>
+</div>
 
                 <h3>Solutions to Prevent Insecure Outputs</h3>
 
