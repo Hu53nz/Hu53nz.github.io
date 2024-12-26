@@ -97,7 +97,7 @@
             justify-content: space-between;
         }
 
-        .before-sanitization, .after-sanitization {
+        .pre-sanitization, .post-sanitization {
             width: 45%;
         }
 
@@ -144,10 +144,10 @@
                     <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
                 </ul>
 
-                <h3>Before and After Input Sanitization</h3>
+                <h3>Effects of Input Sanitization</h3>
                 <div class="input-sanitization-section">
-                    <div class="before-sanitization">
-                        <h4>Before Input Sanitization</h4>
+                    <div class="pre-sanitization">
+                        <h4>Pre Input Sanitization</h4>
                         <p><strong>Test Case 1:</strong> <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
                         <p>Bot Response: <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
                         <div class="explanation">
@@ -179,8 +179,8 @@
                         </div>
                     </div>
 
-                    <div class="after-sanitization">
-                        <h4>After Input Sanitization</h4>
+                    <div class="post-sanitization">
+                        <h4>Post Input Sanitization</h4>
                         <p><strong>Test Case 1:</strong> <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
                         <p>Bot Response: <code>&amp;lt;script&amp;gt;alert(&#x27;XSS&#x27;)&amp;lt;/script&amp;gt;</code></p>
                         <p>Output appears to be sanitized.</p>
@@ -242,10 +242,10 @@
                     <p>Implementing a Content Security Policy (CSP) restricts script sources to trusted domains, reducing the risk of executing malicious code. This block sets the CSP header in the HTTP response. The policy defined here includes:
                         <ul>
                             <li><code>default-src 'self';</code>: This directive allows resources (like scripts, styles, and images) to be loaded only from the same origin as the page. No external resources are allowed.[1]</li>
-                            <li><code>script-src 'self';</code>: This specifically restricts scripts to only those loaded from the same origin.[1]</li>
-                            <li><code>style-src 'self';</code>: This restricts stylesheets to those loaded from the same origin.[1]</li>
-                            <li><code>img-src 'self' data:;</code>: This allows images to be loaded from the same origin and also allows inline images (like base64 encoded images).[1]</li>
-                            <li><code>frame-ancestors 'none';</code>: This prevents the webpage from being embedded in a frame or iframe, which can protect against clickjacking attacks.[1]</li>
+                            <li><code>script-src 'self';</code>: This specifically restricts scripts to only those loaded from the same origin.[2]</li>
+                            <li><code>style-src 'self';</code>: This restricts stylesheets to those loaded from the same origin.[2]</li>
+                            <li><code>img-src 'self' data:;</code>: This allows images to be loaded from the same origin and also allows inline images (like base64 encoded images).[2]</li>
+                            <li><code>frame-ancestors 'none';</code>: This prevents the webpage from being embedded in a frame or iframe, which can protect against clickjacking attacks.[2]</li>
                         </ul>
                     </p>
                 </div>
