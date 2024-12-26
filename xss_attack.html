@@ -241,11 +241,11 @@
                     <img src="images/csp_example.png" alt="CSP Code Snippet">
                     <p>Implementing a Content Security Policy (CSP) restricts script sources to trusted domains, reducing the risk of executing malicious code. This block sets the CSP header in the HTTP response. The policy defined here includes:
                         <ul>
-                            <li><code>default-src 'self';</code>: This directive allows resources (like scripts, styles, and images) to be loaded only from the same origin as the page. No external resources are allowed.</li>
-                            <li><code>script-src 'self';</code>: This specifically restricts scripts to only those loaded from the same origin.</li>
-                            <li><code>style-src 'self';</code>: This restricts stylesheets to those loaded from the same origin.</li>
-                            <li><code>img-src 'self' data:;</code>: This allows images to be loaded from the same origin and also allows inline images (like base64 encoded images).</li>
-                            <li><code>frame-ancestors 'none';</code>: This prevents the webpage from being embedded in a frame or iframe, which can protect against clickjacking attacks.</li>
+                            <li><code>default-src 'self';</code>: This directive allows resources (like scripts, styles, and images) to be loaded only from the same origin as the page. No external resources are allowed.[1]</li>
+                            <li><code>script-src 'self';</code>: This specifically restricts scripts to only those loaded from the same origin.[1]</li>
+                            <li><code>style-src 'self';</code>: This restricts stylesheets to those loaded from the same origin.[1]</li>
+                            <li><code>img-src 'self' data:;</code>: This allows images to be loaded from the same origin and also allows inline images (like base64 encoded images).[1]</li>
+                            <li><code>frame-ancestors 'none';</code>: This prevents the webpage from being embedded in a frame or iframe, which can protect against clickjacking attacks.[1]</li>
                         </ul>
                     </p>
                 </div>
