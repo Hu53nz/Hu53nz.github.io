@@ -91,28 +91,6 @@
                 margin-top: 20px;
             }
         }
-
-        .input-sanitization-section {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .pre-sanitization, .post-sanitization {
-            width: 45%;
-        }
-
-        .explanation {
-            color: red;
-            font-weight: bold;
-        }
-
-        .solutions-section {
-            margin-top: 30px;
-        }
-
-        .code-snippet {
-            margin-top: 20px;
-        }
     </style>
 </head>
 <body>
@@ -137,147 +115,44 @@
             <div class="text-content">
                 <h2>What is a Cross-Site Scripting (XSS) Attack?</h2>
                 <p>An XSS attack occurs when an attacker injects malicious scripts into content from otherwise trusted websites.</p>
-                
-                <h3>Examples of XSS Attacks</h3>
-                <ul>
-                    <li><strong>Stored XSS:</strong> Malicious script is stored on the server and executed when users visit the site.</li>
-                    <li><strong>Reflected XSS:</strong> Malicious script is part of the URL and executed immediately.</li>
-                </ul>
 
-                <h3>Effects of Input Sanitization</h3>
-                <div class="input-sanitization-section">
-                    <div class="pre-sanitization">
-                        <h4>Pre Input Sanitization</h4>
-                        <p><strong>Test Case 1:</strong> <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
-                        <p>Bot Response: <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
-                        <div class="explanation">
-                            <p><strong>Explanation:</strong> The output contains the malicious script which could execute the JavaScript code on the user's browser, leading to an XSS attack.[1].</p>
-                        </div>
-
-                        <p><strong>Test Case 2:</strong> <code>'; DROP TABLE users;--</code></p>
-                        <p>Bot Response: <code>'; DROP TABLE users;--</code></p>
-                        <div class="explanation">
-                            <p><strong>Explanation:</strong> The input can cause a SQL injection vulnerability, potentially deleting data from the database.</p>
-                        </div>
-
-                        <p><strong>Test Case 3:</strong> <code>; ls</code></p>
-                        <p>Bot Response: <code>; ls.asm</code></p>
-                        <div class="explanation">
-                            <p><strong>Explanation:</strong> The input could allow command injection, executing system commands like 'ls' to list files, posing a serious security risk.</p>
-                        </div>
-
-                        <p><strong>Test Case 4:</strong> <code>&& cat /etc/passwd</code></p>
-                        <p>Bot Response: <code>&& cat /etc/passwd | grep -v root | grep -v nobody</code></p>
-                        <div class="explanation">
-                            <p><strong>Explanation:</strong> This could allow unauthorized access to sensitive system files, such as the password file.</p>
-                        </div>
-
-                        <p><strong>Test Case 5:</strong> <code>&lt;img src='x' onerror='alert(1)'&gt;</code></p>
-                        <p>Bot Response: <code>&lt;img src='x' onerror='alert(1)'&gt;</code></p>
-                        <div class="explanation">
-                            <p><strong>Explanation:</strong> This input can trigger an image error event and execute JavaScript code, leading to a possible XSS attack.</p>
-                        </div>
-                    </div>
-
-                    <div class="post-sanitization">
-                        <h4>Post Input Sanitization</h4>
-                        <p><strong>Test Case 1:</strong> <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
-                        <p>Bot Response: <code>&amp;lt;script&amp;gt;alert(&#x27;XSS&#x27;)&amp;lt;/script&amp;gt;</code></p>
-                        <p>Output appears to be sanitized.</p>
-
-                        <p><strong>Test Case 2:</strong> <code>'; DROP TABLE users;--</code></p>
-                        <p>Bot Response: <code>&#x27;; DROP TABLE users;--</code></p>
-                        <p>Output appears to be sanitized.</p>
-
-                        <p><strong>Test Case 3:</strong> <code>; ls</code></p>
-                        <p>Bot Response: <code>; [REDACTED].asm</code></p>
-                        <p>Output appears to be sanitized.</p>
-
-                        <p><strong>Test Case 4:</strong> <code>&& cat /etc/passwd</code></p>
-                        <p>Bot Response: <code>&amp;&amp; cat /etc/passwd | grep -v root | grep -v nobody</code></p>
-                        <p>Output appears to be sanitized.</p>
-
-                        <p><strong>Test Case 5:</strong> <code>&lt;img src='x' onerror='alert(1)'&gt;</code></p>
-                        <p>Bot Response: <code>&lt;img src=&#x27;x&#x27; onerror=&#x27;alert(1)&#x27;&gt;</code></p>
-                        <p>Output appears to be sanitized.</p>
-                    </div>
+                <!-- Example Images -->
+                <div class="code-snippet">
+                    <img src="images/html_character_escaping.png" alt="HTML Character Escaping Code Snippet" onclick="openModal(this)">
                 </div>
-
+                <div class="code-snippet">
+                    <img src="images/regex_filtering.png" alt="Regular Expression Filtering Code Snippet" onclick="openModal(this)">
+                </div>
             </div>
         </section>
     </div>
 
-                <h3>Solutions to Prevent Insecure Outputs</h3>
-
-                <strong>HTML Character Escaping (html.escape)</strong>
-                <ul>
-                    <li>Transforms characters like <, >, & into their HTML-encoded equivalents (&lt;, &gt;, &amp;) to prevent them from being interpreted as code.</li>
-                </ul>
-                <div class="code-snippet">
-                    <img src="images/html_character_escaping.png" alt="HTML Character Escaping Code Snippet">
-                    <p>The html.escape() function converts special characters in the output string (e.g., <, >, &) into HTML-safe representations (&lt;, &gt;, &amp;). This helps prevent Cross-Site Scripting (XSS) attacks by ensuring that any potentially dangerous HTML or JavaScript code in the output is not executed by the client browser but instead displayed as text.</p>
-                </div>
-
-                <strong>Regular Expression Filtering (re.sub())</strong>
-                <ul>
-                    <li>Uses regular expressions to filter out potentially harmful patterns such as script tags and on-event handlers.</li>
-                </ul>
-                <div class="code-snippet">
-                    <img src="images/regex_filtering.png" alt="Regular Expression Filtering Code Snippet">
-                    <p>The re.sub() function searches for potentially harmful command phrases such as ls, rm, exec, cmd, or script file extensions (.sh, .exe) and replaces them with [REDACTED]. The flags=re.IGNORECASE ensures the pattern matching is case-insensitive, providing a more comprehensive sanitization. This prevents output from containing potentially dangerous command strings that could encourage a command injection scenario.</p>
-                </div>
-
-                <strong>Input Validation:</strong>
-                <ul>
-                    <li>Validates input to ensure it matches the expected format (e.g., text only, no special characters).</li>
-                </ul>
-                <div class="code-snippet">
-                    <img src="images/input_validation1.png" alt="Input Validation Code Snippet">
-                    <p>The input validation step ensures that the question provided to the model is a string and not excessively long (e.g., limited to 1000 characters). This prevents potential abuse through buffer overflow attacks or submission of malformed data that could disrupt the system's behavior.</p>
-                </div>
-
-                <strong>Additional Solution: Implementing CSP</strong>
-                <div class="code-snippet">
-                    <img src="images/csp_example.png" alt="CSP Code Snippet">
-                    <p>Implementing a Content Security Policy (CSP) restricts script sources to trusted domains, reducing the risk of executing malicious code. This block sets the CSP header in the HTTP response. The policy defined here includes:
-                        <ul>
-                            <li><code>default-src 'self';</code>: This directive allows resources (like scripts, styles, and images) to be loaded only from the same origin as the page. No external resources are allowed.[2]</li>
-                            <li><code>script-src 'self';</code>: This specifically restricts scripts to only those loaded from the same origin.[2]</li>
-                            <li><code>style-src 'self';</code>: This restricts stylesheets to those loaded from the same origin.[2]</li>
-                            <li><code>img-src 'self' data:;</code>: This allows images to be loaded from the same origin and also allows inline images (like base64 encoded images).[2]</li>
-                            <li><code>frame-ancestors 'none';</code>: This prevents the webpage from being embedded in a frame or iframe, which can protect against clickjacking attacks.[2]</li>
-                        </ul>
-                    </p>
-                </div>
-
-                <p>For full code implementation, view the code below:</p>
-                <p><a href="www.google.com">View Code Implementation</a></p>
-            </div>
-        </section>
+    <!-- Modal for Image Expansion -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
     </div>
-
-    <footer>
-        <p>&copy; 2024 Cybersecurity Handbook</p>
-    </footer>
 
     <script>
-        var modal = document.getElementById("modal");
-        var img = document.getElementById("XSSAttackImage");
-        var modalImg = document.getElementById("img01");
-        var captionText = document.getElementById("caption");
-        img.onclick = function() {
+        function openModal(image) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+
             modal.style.display = "block";
-            modalImg.src = this.src;
-            captionText.innerHTML = this.alt;
+            modalImage.src = image.src;
         }
+
         function closeModal() {
+            const modal = document.getElementById("imageModal");
             modal.style.display = "none";
         }
-        window.addEventListener("click", function(event) {
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
             if (event.target === modal) {
-                closeModal();
+                modal.style.display = "none";
             }
-        });
+        }
     </script>
 </body>
 </html>
