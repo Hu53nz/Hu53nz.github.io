@@ -32,7 +32,7 @@
 
         .content-container {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
             align-items: flex-start;
             gap: 40px;
             width: 100%;
@@ -40,12 +40,18 @@
 
         .text-content {
             flex: 3;
+            min-width: 300px;
             text-align: left;
         }
 
-        #ModelTheftImage, .code-snippet img {
+        .image-container {
             flex: 2;
+            min-width: 300px;
             max-width: 100%;
+        }
+
+        #ModelTheftImage, .code-snippet img {
+            width: 100%;
             height: auto;
             margin-left: auto;
             cursor: pointer;
@@ -132,33 +138,33 @@
                             <li>Monitor usage patterns to detect unusual activity or potential attempts at theft.</li>
                         </ul>
                         <div class="code-snippet">
-                            <img src="images/api_rate_limiting.png" alt="API Rate Limiting Code Snippet" class="expandable-image">
+                            <img class="expandable-image" src="images/api_rate_limiting.png" alt="API Rate Limiting Code Snippet">
                             <p>This snippet shows how rate limiting can be implemented to protect an AI model from excessive querying.</p>
                         </div>
                     </li>
                     <li>
                         <strong>Watermarking Models:</strong>
                         <ul>
-                            <li>Embed invisible "watermarks" in the model’s outputs that can later be detected to prove ownership in case of theft.</li>
+                            <li>Embed invisible "watermarks" in the model’s outputs that can later be detected to prove ownership in case of theft.[3]</li>
                         </ul>
                     </li>
                     <li>
                         <strong>Access Control:</strong>
                         <ul>
                             <li>Implement access control mechanisms to ensure that only authorized users can access sensitive models.</li>
-                            <li>Use role-based access control (RBAC) for finer granularity over who can interact with the model.</li>
+                            <li>Use role-based access control (RBAC) for finer granularity over who can interact with the model.[3]</li>
                         </ul>
                     </li>
                     <li>
                         <strong>Model Encryption:</strong>
                         <ul>
-                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered. This ensures secure storage and execution even in untrusted environments.</li>
+                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered.[3]</li>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <div>
-                <img id="ModelTheftImage" src="images/model_theft.png" alt="Model Theft Diagram" class="expandable-image">
+            <div class="image-container">
+                <img id="ModelTheftImage" class="expandable-image" src="images/model_theft.png" alt="Model Theft Diagram">
             </div>
         </section>
     </div>
@@ -174,10 +180,12 @@
     </footer>
 
     <script>
+        // Get the modal and image elements
         const modal = document.getElementById("imageModal");
         const expandedImg = document.getElementById("expandedImage");
         const images = document.querySelectorAll(".expandable-image");
 
+        // Add click event to each image
         images.forEach(img => {
             img.addEventListener("click", function() {
                 modal.style.display = "block";
@@ -185,10 +193,12 @@
             });
         });
 
+        // Close the modal when the close button is clicked
         function closeModal() {
             modal.style.display = "none";
         }
 
+        // Close the modal when clicking outside the image
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
