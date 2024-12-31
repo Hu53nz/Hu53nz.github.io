@@ -52,15 +52,6 @@
             transition: transform 0.2s ease;
         }
 
-        .side-by-side {
-            display: flex;
-            gap: 20px;
-        }
-
-        .side-by-side > div {
-            flex: 1;
-        }
-
         /* Modal styles */
         .modal {
             display: none;
@@ -98,10 +89,6 @@
 
             #ModelTheftImage {
                 margin-top: 20px;
-            }
-
-            .side-by-side {
-                flex-direction: column;
             }
         }
     </style>
@@ -155,24 +142,20 @@
                             <li>Embed invisible "watermarks" in the model’s outputs that can later be detected to prove ownership in case of theft.</li>
                         </ul>
                     </li>
-                </ul>
-                
-                <h3>Access Control & Model Encryption</h3>
-                <div class="side-by-side">
-                    <div>
-                        <h4>Access Control:</h4>
+                    <li>
+                        <strong>Access Control:</strong>
                         <ul>
                             <li>Implement access control mechanisms to ensure that only authorized users can access sensitive models.</li>
                             <li>Use role-based access control (RBAC) for finer granularity over who can interact with the model.</li>
                         </ul>
-                    </div>
-                    <div>
-                        <h4>Model Encryption:</h4>
+                    </li>
+                    <li>
+                        <strong>Model Encryption:</strong>
                         <ul>
                             <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered. This ensures secure storage and execution even in untrusted environments.</li>
                         </ul>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
             <div>
                 <img id="ModelTheftImage" src="images/model_theft.png" alt="Model Theft Diagram" class="expandable-image">
