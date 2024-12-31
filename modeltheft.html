@@ -118,15 +118,16 @@
 
                 <h3>Solution: Protecting Models from Theft</h3>
                 <ul>
-                    <li><strong>Model Encryption:</strong>
+                    <li>
+                        <strong>Model Encryption:</strong>
                         <ul>
-                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered.</li>
+                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered. Example tools include <code>PyCryptodome</code> or <code>Keyczar</code>.</li>
                         </ul>
                     </li>
                 </ul>
             </div>
             <div>
-                <img id="ModelTheftImage" class="expandable-image" src="images/model_theft.png" alt="Model Theft Diagram">
+                <img id="ModelTheftImage" src="images/model_theft.png" alt="Model Theft Diagram">
             </div>
         </section>
     </div>
@@ -142,15 +143,14 @@
     </footer>
 
     <script>
+        // Modal functionality
         const modal = document.getElementById("imageModal");
         const expandedImg = document.getElementById("expandedImage");
-        const images = document.querySelectorAll(".expandable-image");
+        const modelTheftImg = document.getElementById("ModelTheftImage");
 
-        images.forEach(img => {
-            img.addEventListener("click", function() {
-                modal.style.display = "block";
-                expandedImg.src = this.src;
-            });
+        modelTheftImg.addEventListener("click", function() {
+            modal.style.display = "block";
+            expandedImg.src = this.src;
         });
 
         function closeModal() {
@@ -158,7 +158,7 @@
         }
 
         window.onclick = function(event) {
-            if (event.target === modal) {
+            if (event.target == modal) {
                 modal.style.display = "none";
             }
         };
