@@ -114,55 +114,20 @@
         <section class="content-container">
             <div class="text-content">
                 <h2>What is Model Theft?</h2>
-                <p>Model theft occurs when an attacker steals the intellectual property of a trained machine learning model. The goal is to replicate the model's functionality or to exploit its knowledge for malicious purposes, often without the original model owner's consent...</p>
+                <p>Model theft occurs when an attacker steals the intellectual property of a trained machine learning model...</p>
 
-                <h3>Methods of Model Theft</h3>
-                <ul>
-                    <li><strong>API Extraction:</strong> An attacker can repeatedly query a model via its public API to gather information about its behavior and reconstruct the model.</li>
-                    <li><strong>Model Inversion:</strong> This method involves querying a model with specific inputs to reverse-engineer sensitive data it was trained on.</li>
-                    <li><strong>Transfer Learning:</strong> An attacker might use the learned features from a model in a similar task or model to gain access to proprietary knowledge.</li>
-                </ul>
-                
                 <h3>Solution: Protecting Models from Theft</h3>
                 <ul>
-                    <li>
-                        <strong>API Rate Limiting and Monitoring:</strong>
+                    <li><strong>Model Encryption:</strong>
                         <ul>
-                            <li>Impose strict rate limits on API calls to prevent mass querying and model extraction.</li>
-                            <li>Monitor usage patterns to detect unusual activity or potential attempts at theft.</li>
-                        </ul>
-                        <div class="code-snippet">
-                            <img src="images/api_rate_limiting.png" alt="API Rate Limiting Code Snippet">
-                            <p>This snippet shows how rate limiting can be implemented to protect an AI model from excessive querying.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <strong>Watermarking Models:</strong>
-                        <ul>
-                            <li>Embed invisible "watermarks" in the model’s outputs that can later be detected to prove ownership in case of theft.[3]</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Access Control:</strong>
-                        <ul>
-                            <li>Implement access control mechanisms to ensure that only authorized users can access sensitive models.</li>
-                            <li>Use role-based access control (RBAC) for finer granularity over who can interact with the model.[3]</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Model Encryption:</strong>
-                        <ul>
-                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered.[3]</li>
+                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered.</li>
                         </ul>
                     </li>
                 </ul>
-
-                
             </div>
             <div>
-                <img id="ModelTheftImage" src="images/model_theft.png" alt="Model Theft Diagram">
+                <img id="ModelTheftImage" class="expandable-image" src="images/model_theft.png" alt="Model Theft Diagram">
             </div>
-            
         </section>
     </div>
 
@@ -177,12 +142,10 @@
     </footer>
 
     <script>
-        // Get the modal and image elements
         const modal = document.getElementById("imageModal");
         const expandedImg = document.getElementById("expandedImage");
         const images = document.querySelectorAll(".expandable-image");
 
-        // Add click event to each image
         images.forEach(img => {
             img.addEventListener("click", function() {
                 modal.style.display = "block";
@@ -190,18 +153,15 @@
             });
         });
 
-        // Close the modal when the close button is clicked
         function closeModal() {
             modal.style.display = "none";
         }
 
-        // Close the modal when clicking outside the image
         window.onclick = function(event) {
-            if (event.target == modal) {
+            if (event.target === modal) {
                 modal.style.display = "none";
             }
-        }
+        };
     </script>
 </body>
 </html>
-
