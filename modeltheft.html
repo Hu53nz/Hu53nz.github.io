@@ -7,6 +7,7 @@
     <title>Model Theft - Cybersecurity Handbook</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* General Styles */
         body {
             margin: 0;
             padding: 0;
@@ -26,39 +27,37 @@
 
         .container {
             padding: 20px;
-            max-width: 100%;
-            margin: 0;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
+        /* Grid Layout */
         .content-container {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: flex-start;
-            gap: 40px;
-            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 40px;
         }
 
         .text-content {
-            flex: 3;
-            min-width: 300px;
-            text-align: left;
+            grid-column: 1;
         }
 
         .image-container {
-            flex: 2;
-            min-width: 300px;
-            max-width: 100%;
+            grid-column: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        #ModelTheftImage, .code-snippet img {
+        #ModelTheftImage {
             width: 100%;
+            max-width: 400px;
             height: auto;
-            margin-left: auto;
             cursor: pointer;
             transition: transform 0.2s ease;
         }
 
-        /* Modal styles */
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -74,7 +73,7 @@
         .modal-content {
             display: block;
             margin: 5% auto;
-            max-width: 80%;
+            max-width: 90%;
             height: auto;
         }
 
@@ -88,12 +87,17 @@
             cursor: pointer;
         }
 
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .content-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
 
-            #ModelTheftImage {
+            .text-content, .image-container {
+                grid-column: 1;
+            }
+
+            .image-container {
                 margin-top: 20px;
             }
         }
@@ -120,47 +124,21 @@
         <section class="content-container">
             <div class="text-content">
                 <h2>What is Model Theft?</h2>
-                <p>Model theft occurs when an attacker steals the intellectual property of a trained machine learning model. The goal is to replicate the model's functionality or to exploit its knowledge for malicious purposes, often without the original model owner's consent...</p>
+                <p>Model theft occurs when an attacker steals the intellectual property of a trained machine learning model...</p>
 
                 <h3>Methods of Model Theft</h3>
                 <ul>
-                    <li><strong>API Extraction:</strong> An attacker can repeatedly query a model via its public API to gather information about its behavior and reconstruct the model.</li>
-                    <li><strong>Model Inversion:</strong> This method involves querying a model with specific inputs to reverse-engineer sensitive data it was trained on.</li>
-                    <li><strong>Transfer Learning:</strong> An attacker might use the learned features from a model in a similar task or model to gain access to proprietary knowledge.</li>
+                    <li><strong>API Extraction:</strong> An attacker can repeatedly query a model via its public API...</li>
+                    <li><strong>Model Inversion:</strong> This method involves querying a model with specific inputs...</li>
+                    <li><strong>Transfer Learning:</strong> An attacker might use the learned features from a model...</li>
                 </ul>
                 
                 <h3>Solution: Protecting Models from Theft</h3>
                 <ul>
-                    <li>
-                        <strong>API Rate Limiting and Monitoring:</strong>
-                        <ul>
-                            <li>Impose strict rate limits on API calls to prevent mass querying and model extraction.</li>
-                            <li>Monitor usage patterns to detect unusual activity or potential attempts at theft.</li>
-                        </ul>
-                        <div class="code-snippet">
-                            <img class="expandable-image" src="images/api_rate_limiting.png" alt="API Rate Limiting Code Snippet">
-                            <p>This snippet shows how rate limiting can be implemented to protect an AI model from excessive querying.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <strong>Watermarking Models:</strong>
-                        <ul>
-                            <li>Embed invisible "watermarks" in the model’s outputs that can later be detected to prove ownership in case of theft.[3]</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Access Control:</strong>
-                        <ul>
-                            <li>Implement access control mechanisms to ensure that only authorized users can access sensitive models.</li>
-                            <li>Use role-based access control (RBAC) for finer granularity over who can interact with the model.[3]</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Model Encryption:</strong>
-                        <ul>
-                            <li>Encrypt models when deployed to protect them from being downloaded and reverse-engineered.[3]</li>
-                        </ul>
-                    </li>
+                    <li><strong>API Rate Limiting and Monitoring:</strong> Imposing strict rate limits and monitoring usage...</li>
+                    <li><strong>Watermarking Models:</strong> Embedding invisible "watermarks" in outputs...</li>
+                    <li><strong>Access Control:</strong> Implementing role-based access control (RBAC)...</li>
+                    <li><strong>Model Encryption:</strong> Encrypting models during deployment...</li>
                 </ul>
             </div>
             <div class="image-container">
@@ -180,12 +158,10 @@
     </footer>
 
     <script>
-        // Get the modal and image elements
         const modal = document.getElementById("imageModal");
         const expandedImg = document.getElementById("expandedImage");
         const images = document.querySelectorAll(".expandable-image");
 
-        // Add click event to each image
         images.forEach(img => {
             img.addEventListener("click", function() {
                 modal.style.display = "block";
@@ -193,17 +169,15 @@
             });
         });
 
-        // Close the modal when the close button is clicked
         function closeModal() {
             modal.style.display = "none";
         }
 
-        // Close the modal when clicking outside the image
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
-        }
+        };
     </script>
 </body>
 </html>
